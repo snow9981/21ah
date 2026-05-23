@@ -1,0 +1,69 @@
+<svg width="960" height="340" viewBox="0 0 960 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="340" fill="transparent"/>
+  <defs>
+    <style>
+      .serif { font-family: Georgia, "Times New Roman", serif; }
+      .sans { font-family: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+    </style>
+  </defs>
+
+  <circle cx="135" cy="126" r="103" fill="#FFFDF8" fill-opacity=".28" stroke="#B98B58" stroke-width="1.7"/>
+  <circle cx="480" cy="126" r="103" fill="#FFFDF8" fill-opacity=".28" stroke="#B98B58" stroke-width="1.7"/>
+  <circle cx="825" cy="126" r="103" fill="#FFFDF8" fill-opacity=".28" stroke="#B98B58" stroke-width="1.7"/>
+
+  <text x="135" y="142" text-anchor="middle" class="serif" font-size="118" font-weight="700" fill="#233A32">20</text>
+  <text x="480" y="142" text-anchor="middle" class="serif" font-size="118" font-weight="700" fill="#233A32">1</text>
+  <text x="825" y="142" text-anchor="middle" class="serif" font-size="118" font-weight="700" fill="#B98B58">21</text>
+
+  <text x="306" y="147" text-anchor="middle" class="serif" font-size="62" fill="#233A32">+</text>
+  <text x="654" y="147" text-anchor="middle" class="serif" font-size="62" fill="#233A32">=</text>
+
+  <g fill="#B98B58">
+    <path d="M88 190c0-22 15-39 36-39s36 17 36 39v20H88v-20Z"/>
+    <circle cx="124" cy="148" r="20"/>
+    <path d="M150 156c18 4 28 17 28 34v20h-44v-20c0-17 6-29 16-34Z"/>
+    <circle cx="155" cy="154" r="15"/>
+    <path d="M145 139l9-14 8 15"/>
+    <path d="M160 140l9-13 7 15"/>
+  </g>
+
+  <g stroke="#B98B58" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M430 202h57c16 0 29-7 38-19"/>
+    <path d="M430 202v-34"/>
+    <path d="M468 174c13-20 37-20 50 0"/>
+    <path d="M468 174l25 28 25-28"/>
+  </g>
+
+  <g fill="#B98B58">
+    <path d="M782 190c0-21 14-37 34-37s34 16 34 37v20h-68v-20Z"/>
+    <circle cx="816" cy="151" r="18"/>
+    <path d="M843 158c16 4 25 16 25 32v20h-39v-20c0-16 5-27 14-32Z"/>
+    <circle cx="848" cy="156" r="13"/>
+    <path d="M839 143l8-12 7 13"/>
+    <path d="M852 144l8-12 7 13"/>
+  </g>
+
+  <g stroke="#B98B58" stroke-width="2.3" stroke-linecap="round">
+    <path d="M876 16v46"/>
+    <path d="M853 39h46"/>
+    <path d="M861 24l30 30"/>
+    <path d="M891 24l-30 30"/>
+  </g>
+
+  <line x1="38" y1="246" x2="232" y2="246" stroke="#B98B58" stroke-opacity=".45"/>
+  <line x1="383" y1="246" x2="577" y2="246" stroke="#B98B58" stroke-opacity=".45"/>
+  <line x1="728" y1="246" x2="922" y2="246" stroke="#B98B58" stroke-opacity=".45"/>
+
+  <text x="135" y="282" text-anchor="middle" class="sans" font-size="22" font-weight="700" fill="#202724">
+    <tspan x="135" dy="0">20: 많은 보호자가 바라는</tspan>
+    <tspan x="135" dy="30">꿈의 시간</tspan>
+  </text>
+  <text x="480" y="282" text-anchor="middle" class="sans" font-size="22" font-weight="700" fill="#202724">
+    <tspan x="480" dy="0">+: 의료진의 노력과</tspan>
+    <tspan x="480" dy="30">보호자의 사랑</tspan>
+  </text>
+  <text x="825" y="282" text-anchor="middle" class="sans" font-size="22" font-weight="700" fill="#202724">
+    <tspan x="825" dy="0">1: 함께 더하고 싶은</tspan>
+    <tspan x="825" dy="30">소중한 내일</tspan>
+  </text>
+</svg>

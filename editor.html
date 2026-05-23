@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>스물하나 동물병원 문구 편집기</title>
+    <style>
+      :root {
+        --green: #203b33;
+        --gold: #b88a55;
+        --cream: #fffdf8;
+        --ivory: #fbf7ef;
+        --line: rgba(32, 59, 51, 0.16);
+        --muted: #66706a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--ivory);
+        color: #202724;
+        font-family: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+        line-height: 1.6;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 253, 248, 0.94);
+        backdrop-filter: blur(16px);
+      }
+
+      .header-inner,
+      main {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .header-inner {
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      h1,
+      h2,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        color: var(--green);
+        font-size: clamp(1.35rem, 4vw, 2rem);
+      }
+
+      .header-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      button,
+      a.button {
+        min-height: 42px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        background: var(--green);
+        color: #fff;
+        padding: 10px 14px;
+        font: inherit;
+        font-weight: 800;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      button.secondary,
+      a.button.secondary {
+        border-color: var(--line);
+        background: var(--cream);
+        color: var(--green);
+      }
+
+      main {
+        padding: 34px 0 80px;
+      }
+
+      .notice {
+        display: grid;
+        gap: 8px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--cream);
+        padding: 18px;
+        color: var(--muted);
+      }
+
+      .notice strong {
+        color: var(--green);
+      }
+
+      #editor {
+        display: grid;
+        gap: 18px;
+        margin-top: 24px;
+      }
+
+      fieldset {
+        display: grid;
+        gap: 16px;
+        margin: 0;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 253, 248, 0.92);
+        padding: 20px;
+      }
+
+      legend {
+        color: var(--gold);
+        font-weight: 900;
+        padding: 0 8px;
+      }
+
+      label {
+        display: grid;
+        gap: 6px;
+      }
+
+      label span {
+        color: var(--green);
+        font-size: 0.92rem;
+        font-weight: 850;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 86px;
+        resize: vertical;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        color: #202724;
+        padding: 12px;
+        font: inherit;
+        line-height: 1.55;
+      }
+
+      textarea:focus {
+        outline: 3px solid rgba(184, 138, 85, 0.3);
+        border-color: var(--gold);
+      }
+
+      .status {
+        margin-top: 16px;
+        color: var(--green);
+        font-weight: 800;
+      }
+
+      .path {
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-family: Consolas, monospace;
+      }
+
+      @media (max-width: 720px) {
+        .header-inner {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 16px 0;
+        }
+
+        .header-actions,
+        button,
+        a.button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <div>
+          <h1>문구 편집기</h1>
+          <p>스물하나 동물병원 홈페이지의 화면 문구를 수정합니다.</p>
+        </div>
+        <div class="header-actions">
+          <a class="button secondary" href="index.html" target="_blank" rel="noreferrer">홈페이지 보기</a>
+          <button class="secondary" type="button" id="resetButton">처음 값으로 되돌리기</button>
+          <button type="button" id="saveButton">content.js 저장</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="notice">
+        <strong>사용 방법</strong>
+        <p>아래 문구를 수정한 뒤 <b>content.js 저장</b>을 누르세요. 저장한 파일을 이 폴더의 기존 <b>content.js</b>와 교체하면 홈페이지 문구가 바뀝니다.</p>
+        <p>Chrome 또는 Edge에서는 저장 창에서 기존 <b>content.js</b>를 선택해 덮어쓸 수 있습니다. 브라우저가 직접 저장을 지원하지 않으면 파일이 다운로드됩니다.</p>
+      </section>
+
+      <form id="editor" aria-label="홈페이지 문구 편집 양식"></form>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </main>
+
+    <script>
+      document.write('<script src="content.js?v=' + Date.now() + '"><\/script>');
+    </script>
+    <script>
+      const sectionNames = {
+        seo: "SEO",
+        brand: "브랜드",
+        nav: "메뉴",
+        hero: "첫 화면 문구",
+        quick: "빠른 이동 카드",
+        story: "Brand Story",
+        philosophy: "Philosophy",
+        collaboration: "Collaboration",
+        focus: "Focus Care",
+        trust: "Trust",
+        gallery: "사진 섹션",
+        finalCta: "마지막 CTA",
+        price: "진료비용 안내",
+        buttons: "버튼",
+        footer: "푸터"
+      };
+
+      const originalContent = structuredClone(window.SITE_CONTENT || {});
+      const editor = document.querySelector("#editor");
+      const status = document.querySelector("#status");
+
+      function flatten(value, prefix = []) {
+        if (typeof value === "string") {
+          return [{ path: prefix.join("."), value }];
+        }
+
+        if (Array.isArray(value)) {
+          return value.flatMap((item, index) => flatten(item, prefix.concat(index)));
+        }
+
+        if (value && typeof value === "object") {
+          return Object.keys(value).flatMap((key) => flatten(value[key], prefix.concat(key)));
+        }
+
+        return [];
+      }
+
+      function setByPath(target, path, value) {
+        const parts = path.split(".");
+        let current = target;
+
+        parts.forEach((part, index) => {
+          const isLast = index === parts.length - 1;
+          const nextPart = parts[index + 1];
+          const key = Number.isInteger(Number(part)) ? Number(part) : part;
+
+          if (isLast) {
+            current[key] = value;
+            return;
+          }
+
+          if (current[key] === undefined) {
+            current[key] = Number.isInteger(Number(nextPart)) ? [] : {};
+          }
+
+          current = current[key];
+        });
+      }
+
+      function labelFor(path) {
+        const parts = path.split(".");
+        const last = parts[parts.length - 1];
+        const labels = {
+          title: "제목",
+          text: "설명",
+          description: "설명",
+          eyebrow: "상단 작은 문구",
+          subtitle: "보조 문구",
+          kicker: "섹션 라벨",
+          quote: "강조 문장",
+          intro: "도입 문장",
+          message: "문구",
+          footerLine: "하단 문구",
+          name: "이름",
+          englishName: "영문 이름",
+          image: "사진 파일 경로",
+          imageAlt: "사진 설명",
+          label: "작은 라벨",
+          role: "역할/진료 분야",
+          careers: "경력/약력"
+        };
+
+        if (parts.includes("careers")) {
+          return "경력/약력 " + (Number(parts[parts.length - 1]) + 1);
+        }
+
+        return labels[last] || path;
+      }
+
+      function renderEditor() {
+        editor.innerHTML = "";
+        const items = flatten(window.SITE_CONTENT || {});
+        const groups = new Map();
+
+        items.forEach((item) => {
+          const section = item.path.split(".")[0];
+          if (!groups.has(section)) groups.set(section, []);
+          groups.get(section).push(item);
+        });
+
+        groups.forEach((groupItems, section) => {
+          const fieldset = document.createElement("fieldset");
+          const legend = document.createElement("legend");
+          legend.textContent = sectionNames[section] || section;
+          fieldset.appendChild(legend);
+
+          groupItems.forEach((item) => {
+            const label = document.createElement("label");
+            const labelText = document.createElement("span");
+            const pathText = document.createElement("small");
+            const textarea = document.createElement("textarea");
+
+            labelText.textContent = labelFor(item.path);
+            pathText.className = "path";
+            pathText.textContent = item.path;
+            textarea.name = item.path;
+            textarea.value = item.value;
+            textarea.rows = item.value.length > 90 || item.value.includes("\n") ? 4 : 2;
+
+            label.append(labelText, pathText, textarea);
+            fieldset.appendChild(label);
+          });
+
+          editor.appendChild(fieldset);
+        });
+      }
+
+      function collectContent() {
+        const nextContent = {};
+        editor.querySelectorAll("textarea").forEach((textarea) => {
+          setByPath(nextContent, textarea.name, textarea.value);
+        });
+        nextContent.contentVersion = new Date().toLocaleString("ko-KR");
+        return nextContent;
+      }
+
+      function buildContentFile(content) {
+        const json = JSON.stringify(content, null, 2);
+        return (
+          "window.SITE_CONTENT = " + json + ";\n" +
+          "document.documentElement.dataset.siteContent = JSON.stringify(window.SITE_CONTENT);\n" +
+          "document.documentElement.dataset.contentLoaded = \"true\";\n"
+        );
+      }
+
+      async function saveContent() {
+        const fileText = buildContentFile(collectContent());
+
+        if ("showSaveFilePicker" in window) {
+          try {
+            const handle = await window.showSaveFilePicker({
+              suggestedName: "content.js",
+              types: [
+                {
+                  description: "JavaScript file",
+                  accept: { "text/javascript": [".js"] }
+                }
+              ]
+            });
+            const writable = await handle.createWritable();
+            await writable.write(fileText);
+            await writable.close();
+            status.textContent = "content.js 저장이 완료되었습니다. 홈페이지를 새로고침해 확인하세요.";
+            return;
+          } catch (error) {
+            if (error.name === "AbortError") return;
+          }
+        }
+
+        const blob = new Blob([fileText], { type: "text/javascript;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "content.js";
+        link.click();
+        URL.revokeObjectURL(url);
+        status.textContent = "content.js가 다운로드되었습니다. 기존 파일과 교체한 뒤 홈페이지를 새로고침하세요.";
+      }
+
+      document.querySelector("#saveButton").addEventListener("click", saveContent);
+      document.querySelector("#resetButton").addEventListener("click", () => {
+        window.SITE_CONTENT = structuredClone(originalContent);
+        renderEditor();
+        status.textContent = "편집기의 값이 처음 상태로 돌아왔습니다. 아직 파일은 저장되지 않았습니다.";
+      });
+
+      renderEditor();
+    </script>
+  </body>
+</html>

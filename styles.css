@@ -16,6 +16,7 @@
   --radius-card: 8px;
   --container: min(1180px, calc(100% - 32px));
   --header-height: 76px;
+  --font-sans: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
 }
 
 * {
@@ -30,7 +31,7 @@ body {
   margin: 0;
   background: var(--color-ivory);
   color: var(--color-charcoal);
-  font-family: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.65;
   word-break: keep-all;
 }
@@ -63,7 +64,7 @@ h3 {
 }
 
 h1 {
-  font-family: Georgia, "Times New Roman", "Apple SD Gothic Neo", serif;
+  font-family: var(--font-sans);
   font-size: clamp(2.75rem, 11vw, 4.65rem);
   font-weight: 700;
   white-space: pre-line;
@@ -397,7 +398,7 @@ h3 {
   width: fit-content;
   border-bottom: 1px solid rgba(184, 138, 85, 0.48);
   color: var(--color-gold);
-  font-family: Georgia, "Times New Roman", "Apple SD Gothic Neo", serif;
+  font-family: var(--font-sans);
   font-size: clamp(1.35rem, 5vw, 2.05rem);
   padding: 0 0 12px;
 }
@@ -509,7 +510,7 @@ h3 {
   align-items: center;
   gap: 18px;
   color: var(--color-green);
-  font-family: Georgia, "Times New Roman", "Apple SD Gothic Neo", serif;
+  font-family: var(--font-sans);
   font-size: clamp(1rem, 3.5vw, 1.32rem);
   font-weight: 700;
   text-align: center;

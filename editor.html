@@ -7,6 +7,9 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <title>스물하나 동물병원 문구/스타일 편집기</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;650;700;800;900&display=swap" rel="stylesheet" />
     <style>
       :root {
         --green: #203b33;
@@ -25,7 +28,7 @@
         margin: 0;
         background: var(--ivory);
         color: #202724;
-        font-family: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+        font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
         line-height: 1.6;
       }
 
@@ -344,6 +347,7 @@
 
       const fontOptions = [
         ["", "기존 디자인 유지"],
+        ['"Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif', "Noto Sans KR (PC/모바일 권장)"],
         ['"Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif', "깔끔한 고딕"],
         ['"Malgun Gothic", "맑은 고딕", system-ui, sans-serif', "맑은 고딕"],
         ['"Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif', "Noto Sans KR"],
@@ -356,7 +360,7 @@
         ['"Noto Serif KR", "AppleMyungjo", "Batang", serif', "차분한 명조"],
         ['"Batang", "바탕", "Noto Serif KR", serif', "바탕"],
         ['"Gungsuh", "궁서", "Batang", serif', "궁서"],
-        ['Georgia, "Times New Roman", "Apple SD Gothic Neo", serif', "영문 세리프 느낌"]
+        ['Georgia, "Times New Roman", "Apple SD Gothic Neo", serif', "영문 세리프 느낌 (기기별 차이 가능)"]
       ];
 
       const titleSizeOptions = [
@@ -415,7 +419,7 @@
 
       const defaultStyleValues = {
         header: {
-          fontFamily: "깔끔한 고딕",
+          fontFamily: "Noto Sans KR (PC/모바일 권장)",
           titleSize: "보통",
           bodySize: "보통",
           titleWeight: "굵게",
@@ -424,7 +428,7 @@
           bodyColor: "딥그린"
         },
         hero: {
-          fontFamily: "제목: 영문 세리프 느낌 / 본문: 깔끔한 고딕",
+          fontFamily: "Noto Sans KR (PC/모바일 권장)",
           titleSize: "아주 크게",
           bodySize: "조금 크게",
           titleWeight: "굵게",
@@ -433,7 +437,7 @@
           bodyColor: "차분한 그린"
         },
         quick: {
-          fontFamily: "깔끔한 고딕",
+          fontFamily: "Noto Sans KR (PC/모바일 권장)",
           titleSize: "보통",
           bodySize: "작게",
           titleWeight: "굵게",
@@ -442,7 +446,7 @@
           bodyColor: "회색 그린"
         },
         story: {
-          fontFamily: "깔끔한 고딕",
+          fontFamily: "Noto Sans KR (PC/모바일 권장)",
           titleSize: "크게",
           bodySize: "보통",
           titleWeight: "굵게",
@@ -451,7 +455,7 @@
           bodyColor: "회색 그린"
         },
         philosophy: {
-          fontFamily: "깔끔한 고딕",
+          fontFamily: "Noto Sans KR (PC/모바일 권장)",
           titleSize: "크게",
           bodySize: "보통",
           titleWeight: "굵게",
@@ -460,7 +464,7 @@
           bodyColor: "회색 그린"
         },
         collaboration: {
-          fontFamily: "깔끔한 고딕",
+          fontFamily: "Noto Sans KR (PC/모바일 권장)",
           titleSize: "크게",
           bodySize: "보통",
           titleWeight: "굵게",
@@ -469,7 +473,7 @@
           bodyColor: "회색 그린"
         },
         focus: {
-          fontFamily: "깔끔한 고딕",
+          fontFamily: "Noto Sans KR (PC/모바일 권장)",
           titleSize: "크게",
           bodySize: "보통",
           titleWeight: "굵게",
@@ -478,7 +482,7 @@
           bodyColor: "회색 그린"
         },
         trust: {
-          fontFamily: "깔끔한 고딕",
+          fontFamily: "Noto Sans KR (PC/모바일 권장)",
           titleSize: "크게",
           bodySize: "보통",
           titleWeight: "굵게",
@@ -487,7 +491,7 @@
           bodyColor: "회색 그린"
         },
         gallery: {
-          fontFamily: "깔끔한 고딕",
+          fontFamily: "Noto Sans KR (PC/모바일 권장)",
           titleSize: "크게",
           bodySize: "보통",
           titleWeight: "굵게",
@@ -496,7 +500,7 @@
           bodyColor: "밝은 아이보리"
         },
         finalCta: {
-          fontFamily: "깔끔한 고딕",
+          fontFamily: "Noto Sans KR (PC/모바일 권장)",
           titleSize: "크게",
           bodySize: "보통",
           titleWeight: "굵게",
@@ -505,7 +509,7 @@
           bodyColor: "밝은 아이보리"
         },
         price: {
-          fontFamily: "깔끔한 고딕",
+          fontFamily: "Noto Sans KR (PC/모바일 권장)",
           titleSize: "보통",
           bodySize: "보통",
           titleWeight: "굵게",
@@ -514,7 +518,7 @@
           bodyColor: "회색 그린"
         },
         footer: {
-          fontFamily: "깔끔한 고딕",
+          fontFamily: "Noto Sans KR (PC/모바일 권장)",
           titleSize: "보통",
           bodySize: "보통",
           titleWeight: "굵게",

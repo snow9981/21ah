@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <title>스물하나 동물병원 문구 편집기</title>
+    <title>스물하나 동물병원 문구/스타일 편집기</title>
     <style>
       :root {
         --green: #203b33;
@@ -162,6 +162,68 @@
         border-color: var(--gold);
       }
 
+      select,
+      input {
+        width: 100%;
+        min-height: 42px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        color: #202724;
+        padding: 9px 10px;
+        font: inherit;
+      }
+
+      select:focus,
+      input:focus {
+        outline: 3px solid rgba(184, 138, 85, 0.3);
+        border-color: var(--gold);
+      }
+
+      .style-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .style-help {
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .font-preview {
+        display: grid;
+        gap: 14px;
+        margin-top: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 253, 248, 0.94);
+        padding: 20px;
+      }
+
+      .font-preview-controls {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 10px;
+        align-items: end;
+      }
+
+      .font-preview-output {
+        min-height: 92px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(32, 59, 51, 0.12);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--green);
+        padding: 22px;
+        font-size: clamp(2rem, 7vw, 4.2rem);
+        font-weight: 800;
+        line-height: 1.15;
+        text-align: center;
+        word-break: keep-all;
+      }
+
       .status {
         margin-top: 16px;
         color: var(--green);
@@ -172,6 +234,10 @@
         color: var(--muted);
         font-size: 0.78rem;
         font-family: Consolas, monospace;
+      }
+
+      .style-grid .path {
+        font-family: inherit;
       }
 
       @media (max-width: 720px) {
@@ -186,6 +252,14 @@
         a.button {
           width: 100%;
         }
+
+        .style-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .font-preview-controls {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -193,13 +267,14 @@
     <header>
       <div class="header-inner">
         <div>
-          <h1>문구 편집기</h1>
-          <p>스물하나 동물병원 홈페이지의 화면 문구를 수정합니다.</p>
+          <h1>문구/스타일 편집기</h1>
+          <p>스물하나 동물병원 홈페이지의 화면 문구와 구역별 글꼴 스타일을 수정합니다.</p>
         </div>
         <div class="header-actions">
           <a class="button secondary" href="index.html" target="_blank" rel="noreferrer">홈페이지 보기</a>
           <button class="secondary" type="button" id="resetButton">처음 값으로 되돌리기</button>
-          <button type="button" id="saveButton">content.js 저장</button>
+          <button class="secondary" type="button" id="exportButton">content.js 내려받기</button>
+          <button type="button" id="saveButton">홈페이지에 적용</button>
         </div>
       </div>
     </header>
@@ -207,8 +282,23 @@
     <main>
       <section class="notice">
         <strong>사용 방법</strong>
-        <p>아래 문구를 수정한 뒤 <b>content.js 저장</b>을 누르세요. 저장한 파일을 이 폴더의 기존 <b>content.js</b>와 교체하면 홈페이지 문구가 바뀝니다.</p>
-        <p>Chrome 또는 Edge에서는 저장 창에서 기존 <b>content.js</b>를 선택해 덮어쓸 수 있습니다. 브라우저가 직접 저장을 지원하지 않으면 파일이 다운로드됩니다.</p>
+        <p>아래 문구와 스타일을 수정한 뒤 <b>홈페이지에 적용</b>을 누르세요. 같은 브라우저에서 홈페이지를 새로고침하면 바로 반영됩니다.</p>
+        <p>배포용 파일이 필요하면 <b>content.js 내려받기</b>를 누른 뒤 이 폴더의 기존 파일과 교체하세요.</p>
+      </section>
+
+      <section class="font-preview" aria-labelledby="font-preview-title">
+        <div>
+          <h2 id="font-preview-title">글꼴 미리보기</h2>
+          <p class="style-help">글꼴을 선택한 뒤 미리보기 버튼을 누르면 아래 예시 문구에 적용됩니다.</p>
+        </div>
+        <div class="font-preview-controls">
+          <label>
+            <span>미리볼 글꼴</span>
+            <select id="fontPreviewSelect"></select>
+          </label>
+          <button class="secondary" type="button" id="fontPreviewButton">미리보기</button>
+        </div>
+        <div class="font-preview-output" id="fontPreviewOutput">스물하나동물병원</div>
       </section>
 
       <form id="editor" aria-label="홈페이지 문구 편집 양식"></form>
@@ -237,9 +327,265 @@
         footer: "푸터"
       };
 
+      const styleSectionNames = {
+        header: "상단 메뉴",
+        hero: "Hero",
+        quick: "빠른 이동 카드",
+        story: "Brand Story",
+        philosophy: "Philosophy",
+        collaboration: "의료진 소개",
+        focus: "Focus Care",
+        trust: "Trust",
+        gallery: "사진 섹션",
+        finalCta: "마지막 CTA",
+        price: "진료비용 안내",
+        footer: "Footer"
+      };
+
+      const fontOptions = [
+        ["", "기존 디자인 유지"],
+        ['"Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif', "깔끔한 고딕"],
+        ['"Malgun Gothic", "맑은 고딕", system-ui, sans-serif', "맑은 고딕"],
+        ['"Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif', "Noto Sans KR"],
+        ['"Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif', "Pretendard"],
+        ['"Nanum Gothic", "Noto Sans KR", "Malgun Gothic", sans-serif', "나눔고딕"],
+        ['"NanumSquare", "Nanum Gothic", "Malgun Gothic", sans-serif', "나눔스퀘어"],
+        ['"NanumSquareRound", "Nanum Gothic", "Malgun Gothic", sans-serif', "나눔스퀘어 라운드"],
+        ['"Gulim", "굴림", "Malgun Gothic", sans-serif', "굴림"],
+        ['"Dotum", "돋움", "Malgun Gothic", sans-serif', "돋움"],
+        ['"Noto Serif KR", "AppleMyungjo", "Batang", serif', "차분한 명조"],
+        ['"Batang", "바탕", "Noto Serif KR", serif', "바탕"],
+        ['"Gungsuh", "궁서", "Batang", serif', "궁서"],
+        ['Georgia, "Times New Roman", "Apple SD Gothic Neo", serif', "영문 세리프 느낌"]
+      ];
+
+      const titleSizeOptions = [
+        ["", "기존 디자인 유지"],
+        ["1.5rem", "작게"],
+        ["1.9rem", "보통"],
+        ["2.3rem", "조금 크게"],
+        ["2.8rem", "크게"],
+        ["3.4rem", "아주 크게"]
+      ];
+
+      const bodySizeOptions = [
+        ["", "기존 디자인 유지"],
+        ["0.95rem", "작게"],
+        ["1rem", "보통"],
+        ["1.08rem", "조금 크게"],
+        ["1.18rem", "크게"],
+        ["1.32rem", "아주 크게"]
+      ];
+
+      const weightOptions = [
+        ["", "기존 디자인 유지"],
+        ["400", "얇게"],
+        ["500", "보통"],
+        ["650", "조금 굵게"],
+        ["750", "굵게"],
+        ["850", "아주 굵게"],
+        ["950", "매우 굵게"]
+      ];
+
+      const colorOptions = [
+        ["", "기존 디자인 유지"],
+        ["#203b33", "딥그린"],
+        ["#56675d", "차분한 그린"],
+        ["#66706a", "회색 그린"],
+        ["#b88a55", "골드"],
+        ["#202724", "진한 먹색"],
+        ["#fff7e8", "밝은 아이보리"],
+        ["#ffffff", "흰색"]
+      ];
+
+      const styleFields = [
+        {
+          key: "fontFamily",
+          label: "글꼴",
+          type: "select",
+          options: fontOptions
+        },
+        { key: "titleSize", label: "제목 크기", type: "select", options: titleSizeOptions },
+        { key: "bodySize", label: "본문 크기", type: "select", options: bodySizeOptions },
+        { key: "titleWeight", label: "제목 굵기", type: "select", options: weightOptions },
+        { key: "bodyWeight", label: "본문 굵기", type: "select", options: weightOptions },
+        { key: "titleColor", label: "제목 색상", type: "select", options: colorOptions },
+        { key: "bodyColor", label: "본문 색상", type: "select", options: colorOptions }
+      ];
+
+      const defaultStyleValues = {
+        header: {
+          fontFamily: "깔끔한 고딕",
+          titleSize: "보통",
+          bodySize: "보통",
+          titleWeight: "굵게",
+          bodyWeight: "보통",
+          titleColor: "딥그린",
+          bodyColor: "딥그린"
+        },
+        hero: {
+          fontFamily: "제목: 영문 세리프 느낌 / 본문: 깔끔한 고딕",
+          titleSize: "아주 크게",
+          bodySize: "조금 크게",
+          titleWeight: "굵게",
+          bodyWeight: "조금 굵게",
+          titleColor: "딥그린",
+          bodyColor: "차분한 그린"
+        },
+        quick: {
+          fontFamily: "깔끔한 고딕",
+          titleSize: "보통",
+          bodySize: "작게",
+          titleWeight: "굵게",
+          bodyWeight: "보통",
+          titleColor: "딥그린",
+          bodyColor: "회색 그린"
+        },
+        story: {
+          fontFamily: "깔끔한 고딕",
+          titleSize: "크게",
+          bodySize: "보통",
+          titleWeight: "굵게",
+          bodyWeight: "보통",
+          titleColor: "딥그린",
+          bodyColor: "회색 그린"
+        },
+        philosophy: {
+          fontFamily: "깔끔한 고딕",
+          titleSize: "크게",
+          bodySize: "보통",
+          titleWeight: "굵게",
+          bodyWeight: "보통",
+          titleColor: "딥그린",
+          bodyColor: "회색 그린"
+        },
+        collaboration: {
+          fontFamily: "깔끔한 고딕",
+          titleSize: "크게",
+          bodySize: "보통",
+          titleWeight: "굵게",
+          bodyWeight: "보통",
+          titleColor: "딥그린",
+          bodyColor: "회색 그린"
+        },
+        focus: {
+          fontFamily: "깔끔한 고딕",
+          titleSize: "크게",
+          bodySize: "보통",
+          titleWeight: "굵게",
+          bodyWeight: "보통",
+          titleColor: "딥그린",
+          bodyColor: "회색 그린"
+        },
+        trust: {
+          fontFamily: "깔끔한 고딕",
+          titleSize: "크게",
+          bodySize: "보통",
+          titleWeight: "굵게",
+          bodyWeight: "보통",
+          titleColor: "딥그린",
+          bodyColor: "회색 그린"
+        },
+        gallery: {
+          fontFamily: "깔끔한 고딕",
+          titleSize: "크게",
+          bodySize: "보통",
+          titleWeight: "굵게",
+          bodyWeight: "보통",
+          titleColor: "밝은 아이보리",
+          bodyColor: "밝은 아이보리"
+        },
+        finalCta: {
+          fontFamily: "깔끔한 고딕",
+          titleSize: "크게",
+          bodySize: "보통",
+          titleWeight: "굵게",
+          bodyWeight: "보통",
+          titleColor: "밝은 아이보리",
+          bodyColor: "밝은 아이보리"
+        },
+        price: {
+          fontFamily: "깔끔한 고딕",
+          titleSize: "보통",
+          bodySize: "보통",
+          titleWeight: "굵게",
+          bodyWeight: "보통",
+          titleColor: "딥그린",
+          bodyColor: "회색 그린"
+        },
+        footer: {
+          fontFamily: "깔끔한 고딕",
+          titleSize: "보통",
+          bodySize: "보통",
+          titleWeight: "굵게",
+          bodyWeight: "보통",
+          titleColor: "밝은 아이보리",
+          bodyColor: "밝은 아이보리"
+        }
+      };
+
       const originalContent = structuredClone(window.SITE_CONTENT || {});
       const editor = document.querySelector("#editor");
       const status = document.querySelector("#status");
+      const fontPreviewSelect = document.querySelector("#fontPreviewSelect");
+      const fontPreviewButton = document.querySelector("#fontPreviewButton");
+      const fontPreviewOutput = document.querySelector("#fontPreviewOutput");
+
+      function loadSavedContent() {
+        try {
+          const savedContent = window.localStorage.getItem("SITE_CONTENT_DRAFT");
+          if (!savedContent) return null;
+          return JSON.parse(savedContent);
+        } catch (error) {
+          console.warn("Saved SITE_CONTENT loading failed", error);
+          return null;
+        }
+      }
+
+      function saveBrowserContent(content) {
+        window.localStorage.setItem("SITE_CONTENT_DRAFT", JSON.stringify(content));
+      }
+
+      function clearBrowserContent() {
+        window.localStorage.removeItem("SITE_CONTENT_DRAFT");
+      }
+
+      const savedContent = loadSavedContent();
+      if (savedContent) {
+        window.SITE_CONTENT = savedContent;
+      }
+
+      function ensureStyleSettings() {
+        if (!window.SITE_CONTENT.styles) window.SITE_CONTENT.styles = {};
+
+        Object.keys(styleSectionNames).forEach((section) => {
+          if (!window.SITE_CONTENT.styles[section]) window.SITE_CONTENT.styles[section] = {};
+          styleFields.forEach((field) => {
+            if (window.SITE_CONTENT.styles[section][field.key] === undefined) {
+              window.SITE_CONTENT.styles[section][field.key] = "";
+            }
+          });
+        });
+      }
+
+      function renderFontPreviewSelect() {
+        fontOptions.forEach(([value, text]) => {
+          const option = document.createElement("option");
+          option.value = value;
+          option.textContent = text;
+          fontPreviewSelect.appendChild(option);
+        });
+
+        const firstRealFont = fontOptions.find(([value]) => value);
+        if (firstRealFont) {
+          fontPreviewSelect.value = firstRealFont[0];
+        }
+      }
+
+      function updateFontPreview() {
+        const fontFamily = fontPreviewSelect.value;
+        fontPreviewOutput.style.fontFamily = fontFamily || "";
+      }
 
       function flatten(value, prefix = []) {
         if (typeof value === "string") {
@@ -286,7 +632,6 @@
           title: "제목",
           text: "설명",
           description: "설명",
-          eyebrow: "상단 작은 문구",
           subtitle: "보조 문구",
           kicker: "섹션 라벨",
           quote: "강조 문장",
@@ -309,9 +654,77 @@
         return labels[last] || path;
       }
 
+      function createStyleControl(section, field) {
+        const label = document.createElement("label");
+        const labelText = document.createElement("span");
+        const pathText = document.createElement("small");
+        const currentValue = window.SITE_CONTENT.styles?.[section]?.[field.key] || "";
+        const currentOption = currentValue ? field.options?.find(([value]) => value === currentValue) : null;
+        const currentLabel = currentOption ? currentOption[1] : currentValue;
+        const defaultValue = defaultStyleValues[section]?.[field.key] || "기존 디자인";
+        const displayValue = currentLabel || defaultValue;
+        let control;
+
+        labelText.textContent = field.label + " (현재 설정값: " + displayValue + ")";
+        pathText.className = "path";
+        pathText.textContent = "목록에서 선택하면 됩니다. 어려운 단위나 코드를 직접 쓰지 않아도 됩니다.";
+
+        if (field.type === "select") {
+          control = document.createElement("select");
+          if (currentValue && !field.options.some(([value]) => value === currentValue)) {
+            const option = document.createElement("option");
+            option.value = currentValue;
+            option.textContent = "현재 직접 설정값: " + currentValue;
+            control.appendChild(option);
+          }
+          field.options.forEach(([value, text]) => {
+            const option = document.createElement("option");
+            option.value = value;
+            option.textContent = text;
+            control.appendChild(option);
+          });
+        } else {
+          control = document.createElement("input");
+          control.type = "text";
+          control.placeholder = currentValue ? field.placeholder || "" : defaultValue;
+        }
+
+        control.name = "styles." + section + "." + field.key;
+        control.value = currentValue;
+        label.append(labelText, pathText, control);
+        return label;
+      }
+
+      function renderStyleEditor() {
+        ensureStyleSettings();
+
+        Object.keys(styleSectionNames).forEach((section) => {
+          const fieldset = document.createElement("fieldset");
+          const legend = document.createElement("legend");
+          const help = document.createElement("p");
+          const grid = document.createElement("div");
+
+          legend.textContent = styleSectionNames[section];
+          help.className = "style-help";
+          help.textContent = "원하는 항목을 목록에서 선택하세요. 기존 디자인 유지를 선택하면 원래 홈페이지 설정을 그대로 씁니다.";
+          grid.className = "style-grid";
+
+          styleFields.forEach((field) => {
+            grid.appendChild(createStyleControl(section, field));
+          });
+
+          fieldset.append(legend, help, grid);
+          editor.appendChild(fieldset);
+        });
+      }
+
       function renderEditor() {
         editor.innerHTML = "";
-        const items = flatten(window.SITE_CONTENT || {});
+        const contentForText = structuredClone(window.SITE_CONTENT || {});
+        delete contentForText.styles;
+        renderStyleEditor();
+
+        const items = flatten(contentForText);
         const groups = new Map();
 
         items.forEach((item) => {
@@ -352,6 +765,10 @@
         editor.querySelectorAll("textarea").forEach((textarea) => {
           setByPath(nextContent, textarea.name, textarea.value);
         });
+        editor.querySelectorAll("select, input").forEach((control) => {
+          if (!control.name) return;
+          setByPath(nextContent, control.name, control.value);
+        });
         nextContent.contentVersion = new Date().toLocaleString("ko-KR");
         return nextContent;
       }
@@ -366,6 +783,14 @@
       }
 
       async function saveContent() {
+        const nextContent = collectContent();
+
+        saveBrowserContent(nextContent);
+        window.SITE_CONTENT = structuredClone(nextContent);
+        status.textContent = "홈페이지에 적용했습니다. 열려 있는 홈페이지 탭을 새로고침하면 반영됩니다.";
+      }
+
+      async function exportContentFile() {
         const fileText = buildContentFile(collectContent());
 
         if ("showSaveFilePicker" in window) {
@@ -382,7 +807,7 @@
             const writable = await handle.createWritable();
             await writable.write(fileText);
             await writable.close();
-            status.textContent = "content.js 저장이 완료되었습니다. 홈페이지를 새로고침해 확인하세요.";
+            status.textContent = "content.js 파일을 저장했습니다.";
             return;
           } catch (error) {
             if (error.name === "AbortError") return;
@@ -396,16 +821,21 @@
         link.download = "content.js";
         link.click();
         URL.revokeObjectURL(url);
-        status.textContent = "content.js가 다운로드되었습니다. 기존 파일과 교체한 뒤 홈페이지를 새로고침하세요.";
+        status.textContent = "content.js를 다운로드했습니다.";
       }
 
       document.querySelector("#saveButton").addEventListener("click", saveContent);
+      document.querySelector("#exportButton").addEventListener("click", exportContentFile);
       document.querySelector("#resetButton").addEventListener("click", () => {
+        clearBrowserContent();
         window.SITE_CONTENT = structuredClone(originalContent);
         renderEditor();
-        status.textContent = "편집기의 값이 처음 상태로 돌아왔습니다. 아직 파일은 저장되지 않았습니다.";
+        status.textContent = "브라우저에 저장된 편집값을 지우고 content.js 기준으로 되돌렸습니다.";
       });
 
+      fontPreviewButton.addEventListener("click", updateFontPreview);
+      renderFontPreviewSelect();
+      updateFontPreview();
       renderEditor();
     </script>
   </body>

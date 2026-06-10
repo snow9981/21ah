@@ -23,6 +23,12 @@
   }
 
   function resolveSiteContent() {
+    const savedContent = loadSavedContent();
+    if (savedContent) {
+      window.SITE_CONTENT = savedContent;
+      return window.SITE_CONTENT;
+    }
+
     if (window.SITE_CONTENT) return window.SITE_CONTENT;
 
     const encodedContent = document.documentElement.dataset.siteContent;
@@ -33,6 +39,17 @@
       return window.SITE_CONTENT;
     } catch (error) {
       console.warn("SITE_CONTENT parsing failed", error);
+      return null;
+    }
+  }
+
+  function loadSavedContent() {
+    try {
+      const savedContent = window.localStorage.getItem("SITE_CONTENT_DRAFT");
+      if (!savedContent) return null;
+      return JSON.parse(savedContent);
+    } catch (error) {
+      console.warn("Saved SITE_CONTENT loading failed", error);
       return null;
     }
   }
@@ -89,6 +106,8 @@
       }
     }
 
+    applyEditableStyles();
+
     const versionTarget = document.querySelector("[data-content-version]");
     if (versionTarget && window.SITE_CONTENT.contentVersion) {
       versionTarget.textContent = "문구 버전: " + window.SITE_CONTENT.contentVersion;
@@ -96,6 +115,103 @@
 
     document.documentElement.classList.remove("content-loading");
     return true;
+  }
+
+  function applyTextStyle(target, selector, property, value) {
+    if (!target || !value) return;
+
+    target.querySelectorAll(selector).forEach(function (element) {
+      element.style[property] = value;
+    });
+  }
+
+  function applySectionStyle(section, config) {
+    const target = document.querySelector(config.selector);
+    const style = window.SITE_CONTENT.styles && window.SITE_CONTENT.styles[section];
+
+    if (!target || !style) return;
+
+    if (style.fontFamily) {
+      target.style.fontFamily = style.fontFamily;
+    }
+
+    applyTextStyle(target, config.titleSelector, "fontSize", style.titleSize);
+    applyTextStyle(target, config.titleSelector, "fontWeight", style.titleWeight);
+    applyTextStyle(target, config.titleSelector, "color", style.titleColor);
+    applyTextStyle(target, config.bodySelector, "fontSize", style.bodySize);
+    applyTextStyle(target, config.bodySelector, "fontWeight", style.bodyWeight);
+    applyTextStyle(target, config.bodySelector, "color", style.bodyColor);
+  }
+
+  function applyEditableStyles() {
+    if (!window.SITE_CONTENT || !window.SITE_CONTENT.styles) return;
+
+    const styleSections = {
+      header: {
+        selector: ".site-header",
+        titleSelector: ".brand-name strong",
+        bodySelector: ".desktop-nav a, .header-text-link, .mobile-nav a"
+      },
+      hero: {
+        selector: ".hero",
+        titleSelector: "h1, .hero-subtitle",
+        bodySelector: ".hero-description, .hero-points li, .hero-footer-line"
+      },
+      quick: {
+        selector: ".quick-actions",
+        titleSelector: "strong",
+        bodySelector: "small"
+      },
+      story: {
+        selector: "#story",
+        titleSelector: "h2, .section-kicker",
+        bodySelector: "p"
+      },
+      philosophy: {
+        selector: "#philosophy",
+        titleSelector: "h2, .section-kicker",
+        bodySelector: "p, blockquote"
+      },
+      collaboration: {
+        selector: "#collaboration",
+        titleSelector: "h2, h3, .section-kicker, .doctor-label",
+        bodySelector: "p, li"
+      },
+      focus: {
+        selector: "#focus",
+        titleSelector: "h2, h3, .section-kicker, .card-icon",
+        bodySelector: "p"
+      },
+      trust: {
+        selector: "#trust",
+        titleSelector: "h2, .section-kicker",
+        bodySelector: "p, li, .trust-points span"
+      },
+      gallery: {
+        selector: ".clinic-gallery-section",
+        titleSelector: "h2, .section-kicker",
+        bodySelector: "p"
+      },
+      finalCta: {
+        selector: ".final-cta-section",
+        titleSelector: "h2, .section-kicker",
+        bodySelector: "p, a"
+      },
+      price: {
+        selector: ".price-notice",
+        titleSelector: "h2",
+        bodySelector: "p, a"
+      },
+      footer: {
+        selector: ".site-footer",
+        titleSelector: ".footer-brand strong",
+        bodySelector: "p, dt, dd, a"
+      }
+    };
+
+    Object.keys(styleSections).forEach(function (section) {
+      applySectionStyle(section, styleSections[section]);
+    });
   }
 
   function applyEditableContentWhenReady(tryCount) {

@@ -22,10 +22,9 @@ window.SITE_CONTENT = {
     "title": "보호자와 아이가 함께 안심하고 머무를 수 있는 공간"
   },
   "hero": {
-    "eyebrow": "스물하나 동물병원",
     "title": "스무 살의 바램에\n한 살을 더합니다",
-    "subtitle": "의료진 + 보호자 = 더하기 하나",
-    "description": "스물하나 동물병원은 정확한 진단과 충분한 설명, 보호자와 함께하는 꾸준한 관리로 아이의 시간을 더 오래 지키고 싶습니다.",
+    "subtitle": "한 살을 더 하기 위한 노력",
+    "description": "정확한 진단과 충분한 설명, 보호자와 함께하는 꾸준한 관리로 아이의 시간을 더 오래 지키고 싶습니다.",
     "points": [
       "오래 함께하기 위한 정확한 진료.",
       "한 살 더 건강하게 곁에 머물 수 있도록.",
@@ -171,7 +170,117 @@ window.SITE_CONTENT = {
   "footer": {
     "message": "스물하나 동물병원은 아이들에게 ‘내일’을 한 번 더 선물하고 싶은 마음으로 진료합니다."
   },
-  "contentVersion": "2026-05-22 20:22"
+  "contentVersion": "2026. 6. 10. 오후 3:38:12",
+  "styles": {
+    "header": {
+      "fontFamily": "",
+      "titleSize": "",
+      "bodySize": "",
+      "titleWeight": "",
+      "bodyWeight": "",
+      "titleColor": "",
+      "bodyColor": ""
+    },
+    "hero": {
+      "fontFamily": "",
+      "titleSize": "",
+      "bodySize": "",
+      "titleWeight": "",
+      "bodyWeight": "",
+      "titleColor": "",
+      "bodyColor": ""
+    },
+    "quick": {
+      "fontFamily": "",
+      "titleSize": "",
+      "bodySize": "",
+      "titleWeight": "",
+      "bodyWeight": "",
+      "titleColor": "",
+      "bodyColor": ""
+    },
+    "story": {
+      "fontFamily": "",
+      "titleSize": "",
+      "bodySize": "1.18rem",
+      "titleWeight": "",
+      "bodyWeight": "",
+      "titleColor": "",
+      "bodyColor": ""
+    },
+    "philosophy": {
+      "fontFamily": "",
+      "titleSize": "",
+      "bodySize": "1.18rem",
+      "titleWeight": "",
+      "bodyWeight": "",
+      "titleColor": "",
+      "bodyColor": ""
+    },
+    "collaboration": {
+      "fontFamily": "",
+      "titleSize": "",
+      "bodySize": "",
+      "titleWeight": "",
+      "bodyWeight": "",
+      "titleColor": "",
+      "bodyColor": ""
+    },
+    "focus": {
+      "fontFamily": "",
+      "titleSize": "",
+      "bodySize": "",
+      "titleWeight": "",
+      "bodyWeight": "",
+      "titleColor": "",
+      "bodyColor": ""
+    },
+    "trust": {
+      "fontFamily": "",
+      "titleSize": "",
+      "bodySize": "",
+      "titleWeight": "",
+      "bodyWeight": "",
+      "titleColor": "",
+      "bodyColor": ""
+    },
+    "gallery": {
+      "fontFamily": "",
+      "titleSize": "",
+      "bodySize": "",
+      "titleWeight": "",
+      "bodyWeight": "",
+      "titleColor": "",
+      "bodyColor": ""
+    },
+    "finalCta": {
+      "fontFamily": "",
+      "titleSize": "",
+      "bodySize": "",
+      "titleWeight": "",
+      "bodyWeight": "",
+      "titleColor": "",
+      "bodyColor": ""
+    },
+    "price": {
+      "fontFamily": "",
+      "titleSize": "",
+      "bodySize": "",
+      "titleWeight": "",
+      "bodyWeight": "",
+      "titleColor": "",
+      "bodyColor": ""
+    },
+    "footer": {
+      "fontFamily": "",
+      "titleSize": "",
+      "bodySize": "",
+      "titleWeight": "",
+      "bodyWeight": "",
+      "titleColor": "",
+      "bodyColor": ""
+    }
+  }
 };
 document.documentElement.dataset.siteContent = JSON.stringify(window.SITE_CONTENT);
 document.documentElement.dataset.contentLoaded = "true";

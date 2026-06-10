@@ -575,36 +575,6 @@ h3 {
   box-shadow: var(--shadow-soft);
 }
 
-.clinic-photo-badge {
-  position: absolute;
-  left: clamp(22px, 4vw, 54px);
-  bottom: 36px;
-  width: 118px;
-  height: 118px;
-  display: grid;
-  place-items: center;
-  align-content: center;
-  border: 1px solid rgba(32, 59, 51, 0.14);
-  border-radius: 8px;
-  background: rgba(255, 253, 248, 0.9);
-  color: var(--color-green);
-  box-shadow: var(--shadow-card);
-}
-
-.clinic-photo-badge strong {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 2.4rem;
-  line-height: 1;
-}
-
-.clinic-photo-badge span {
-  color: var(--color-gold);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .first-photo + .hero {
   min-height: auto;
   padding-top: 70px;
@@ -1258,15 +1228,6 @@ h3 {
   .clinic-photo-wrap img {
     aspect-ratio: 4 / 3;
     object-position: center center;
-  }
-
-  .clinic-photo-badge {
-    position: relative;
-    left: auto;
-    bottom: auto;
-    width: 104px;
-    height: 104px;
-    margin: -60px 0 0 20px;
   }
 
   .clinic-gallery-media img {

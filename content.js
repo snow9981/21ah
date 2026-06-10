@@ -5,7 +5,7 @@ window.SITE_CONTENT = {
   },
   "brand": {
     "name": "스물하나 동물병원",
-    "englishName": "21 Animal Hospital"
+    "englishName": "SMULHANA ANIMAL HOSPITAL"
   },
   "nav": {
     "intro": "병원소개",

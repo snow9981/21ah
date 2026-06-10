@@ -15,7 +15,7 @@
   --shadow-card: 0 12px 34px rgba(38, 45, 42, 0.08);
   --radius-card: 8px;
   --container: min(1180px, calc(100% - 32px));
-  --header-height: 76px;
+  --header-height: 116px;
   --font-sans: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
 }
 
@@ -135,7 +135,7 @@ h3 {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 18px;
   flex: 0 0 auto;
   color: var(--color-green);
   white-space: nowrap;
@@ -143,13 +143,14 @@ h3 {
 
 .brand-logo {
   display: block;
-  width: 54px;
+  width: 112px;
   height: auto;
   object-fit: contain;
 }
 
 .brand-name strong {
-  font-size: 1.42rem;
+  font-size: 2.28rem;
+  font-weight: 900;
   letter-spacing: 0;
   line-height: 1.08;
 }
@@ -540,13 +541,13 @@ h3 {
 }
 
 .clinic-photo-band.first-photo {
-  padding-top: calc(var(--header-height) + 18px);
-  padding-bottom: 42px;
+  padding-top: calc(var(--header-height) + 12px);
+  padding-bottom: 54px;
 }
 
 .clinic-photo-wrap {
   position: relative;
-  width: var(--container);
+  width: min(1320px, calc(100% - 24px));
   margin: 0 auto;
   display: grid;
   gap: 22px;
@@ -555,7 +556,7 @@ h3 {
 .clinic-photo-wrap img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 8.6;
+  aspect-ratio: 16 / 9.6;
   border-radius: 8px;
   object-fit: cover;
   object-position: center 120%;
@@ -1034,7 +1035,7 @@ h3 {
 @media (min-width: 768px) {
   :root {
     --container: min(1180px, calc(100% - 56px));
-    --header-height: 86px;
+    --header-height: 126px;
   }
 
   .header-text-link {
@@ -1180,6 +1181,16 @@ h3 {
   }
 }
 
+@media (min-width: 768px) and (max-width: 1120px) {
+  .brand-logo {
+    width: 92px;
+  }
+
+  .brand-name strong {
+    font-size: 1.9rem;
+  }
+}
+
 @media (max-width: 767px) {
   .hero-visual {
     opacity: 0.24;
@@ -1208,12 +1219,12 @@ h3 {
   }
 
   .clinic-photo-band.first-photo {
-    padding-top: calc(var(--header-height) + 12px);
-    padding-bottom: 34px;
+    padding-top: calc(var(--header-height) + 8px);
+    padding-bottom: 38px;
   }
 
   .clinic-photo-wrap img {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3.6 / 3;
     object-position: center center;
   }
 
@@ -1228,11 +1239,11 @@ h3 {
   }
 
   .brand-logo {
-    width: 42px;
+    width: 78px;
   }
 
   .brand-name strong {
-    font-size: 1.06rem;
+    font-size: 1.52rem;
   }
 
   .button {

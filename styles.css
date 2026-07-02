@@ -140,6 +140,7 @@ h3 {
   align-items: center;
   gap: 12px;
   flex: 0 0 auto;
+  min-width: 0;
   max-width: calc(100% - 56px);
   color: var(--color-green);
   white-space: nowrap;
@@ -147,12 +148,18 @@ h3 {
 
 .brand-logo {
   display: block;
+  flex: 0 0 auto;
   width: 78px;
   height: auto;
   object-fit: contain;
 }
 
+.brand-name {
+  min-width: 0;
+}
+
 .brand-name strong {
+  display: block;
   font-size: 1.52rem;
   font-weight: 900;
   letter-spacing: 0;

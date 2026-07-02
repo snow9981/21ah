@@ -188,7 +188,7 @@ http://127.0.0.1:8765/editor.html
 
 ```text
 {{NAVER_PLACE_URL}}
-{{NAVER_BLOG_URL}}
+https://blog.naver.com/carepaws
 {{KAKAO_CHANNEL_URL}}
 {{PHONE_NUMBER}}
 {{PRICE_NOTICE_URL}}
@@ -247,4 +247,3 @@ http://PC의IPv4주소:8765/index.html?v=1234
 - 의료 브랜드 느낌을 유지하되 너무 딱딱하지 않게 구성
 - 360px 모바일에서도 깨지지 않도록 반응형 처리
 - PC에서는 섹션 폭과 문단 폭이 과하게 넓어지지 않도록 조정
-

@@ -349,22 +349,44 @@ body[data-page="directions"] .directions-section {
 
 .hero-points li {
   display: grid;
-  grid-template-columns: 36px 1fr;
+  grid-template-columns: 18px 1fr;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   color: var(--color-green);
   font-weight: 750;
 }
 
 .hero-points li > span[aria-hidden="true"] {
-  width: 36px;
-  height: 36px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: rgba(223, 227, 212, 0.84);
+  position: relative;
+  width: 18px;
+  min-height: 32px;
+  display: block;
   color: var(--color-gold);
-  font-size: 1.15rem;
+  font-size: 0;
+}
+
+.hero-points li > span[aria-hidden="true"]::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  border-radius: 999px;
+  background: rgba(184, 138, 85, 0.42);
+}
+
+.hero-points li > span[aria-hidden="true"]::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 5px rgba(234, 215, 188, 0.42);
+  transform: translateY(-50%);
 }
 
 .hero-points li > span:not([aria-hidden="true"]) {
@@ -423,10 +445,23 @@ body[data-page="directions"] .directions-section {
 
 .quick-icon::before {
   content: "";
-  width: 22px;
-  height: 22px;
-  border: 2px solid currentColor;
-  border-radius: 4px;
+  width: 28px;
+  height: 28px;
+  background: currentColor;
+  -webkit-mask: var(--quick-icon) center / contain no-repeat;
+  mask: var(--quick-icon) center / contain no-repeat;
+}
+
+.quick-actions a:nth-child(1) .quick-icon {
+  --quick-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cg fill='none' stroke='black' stroke-width='2.35' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='10' cy='10' r='6.5'/%3E%3Cpath d='M10 6.8v3.7l2.4 1.5'/%3E%3Cpath d='M20 13.2c2.5 0 4.5 2 4.5 4.4 0 3.1-4.5 7-4.5 7s-4.5-3.9-4.5-7c0-2.4 2-4.4 4.5-4.4Z'/%3E%3Ccircle cx='20' cy='17.6' r='1.15'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.quick-actions a:nth-child(2) .quick-icon {
+  --quick-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cg fill='none' stroke='black' stroke-width='2.35' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 24V8.5L14 4l8 4.5V24'/%3E%3Cpath d='M10 24v-6h8v6'/%3E%3Cpath d='M14 9v6'/%3E%3Cpath d='M11 12h6'/%3E%3Cpath d='M8.8 24h10.4'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.quick-actions a:nth-child(3) .quick-icon {
+  --quick-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cg fill='none' stroke='black' stroke-width='2.35' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 7.6c0-2 1.6-3.6 3.6-3.6h10.8c2 0 3.6 1.6 3.6 3.6v7.2c0 2-1.6 3.6-3.6 3.6h-5.9L8 23v-4.6c-1.7-.3-3-1.8-3-3.6V7.6Z'/%3E%3Cpath d='M9.2 10.4h9.6'/%3E%3Cpath d='M9.2 14.2h6.2'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 .hero-footer-line {

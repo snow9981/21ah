@@ -219,6 +219,47 @@ h3 {
   background: rgba(223, 227, 212, 0.72);
 }
 
+.desktop-nav a[aria-current="page"] {
+  color: var(--color-gold);
+}
+
+.primary-nav a[aria-current="page"] {
+  background: rgba(234, 215, 188, 0.42);
+  color: var(--color-green);
+}
+
+body[data-page] .philosophy-section,
+body[data-page] .collaboration-section,
+body[data-page] .focus-section,
+body[data-page] .trust-section,
+body[data-page] .clinic-gallery-section,
+body[data-page] .final-cta-section,
+body[data-page] .price-notice {
+  display: none;
+}
+
+body[data-page]:not([data-page="home"]) .clinic-photo-band,
+body[data-page]:not([data-page="home"]) .hero,
+body[data-page]:not([data-page="home"]) .story-section {
+  display: none;
+}
+
+body[data-page]:not([data-page="home"]) main {
+  padding-top: var(--header-height);
+}
+
+body[data-page="care"] .focus-section,
+body[data-page="care"] .clinic-gallery-section,
+body[data-page="team"] .collaboration-section,
+body[data-page="philosophy"] .philosophy-section,
+body[data-page="philosophy"] .trust-section {
+  display: block;
+}
+
+body[data-page="care"] .price-notice {
+  display: grid;
+}
+
 .hero {
   position: relative;
   min-height: 100svh;
@@ -1047,7 +1088,7 @@ h3 {
   }
 
   .quick-actions {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     margin-top: 18px;
   }
 

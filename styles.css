@@ -922,38 +922,38 @@ body[data-page="directions"] .directions-section {
 
 .directions-panel {
   display: grid;
-  gap: 34px;
-  padding: clamp(24px, 6vw, 46px);
+  gap: 30px;
+  padding: clamp(22px, 5vw, 42px);
 }
 
 .directions-guide-block {
   display: grid;
-  gap: 22px;
+  gap: 18px;
 }
 
 .directions-guide-block + .directions-guide-block {
   border-top: 1px solid rgba(32, 59, 51, 0.12);
-  padding-top: 34px;
+  padding-top: 30px;
 }
 
 .guide-heading {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   color: var(--color-charcoal);
-  font-size: clamp(2rem, 6vw, 3rem);
+  font-size: clamp(1.5rem, 4.8vw, 2.08rem);
   font-weight: 900;
 }
 
 .guide-heading > span {
   position: relative;
-  width: 42px;
-  height: 42px;
+  width: 32px;
+  height: 32px;
   flex: 0 0 auto;
-  border: 3px solid rgba(32, 59, 51, 0.28);
+  border: 2px solid rgba(32, 59, 51, 0.24);
   border-radius: 50%;
   background: radial-gradient(circle, #f8faf9 0 58%, #9aa49e 59% 100%);
-  box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.55);
+  box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.55);
 }
 
 .guide-heading > span::before,
@@ -962,8 +962,8 @@ body[data-page="directions"] .directions-section {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 4px;
-  height: 14px;
+  width: 3px;
+  height: 11px;
   border-radius: 999px;
   background: #4b514e;
   transform-origin: 50% 0;
@@ -974,13 +974,13 @@ body[data-page="directions"] .directions-section {
 }
 
 .guide-heading > span::after {
-  height: 11px;
+  height: 9px;
   transform: translate(-50%, -1px) rotate(90deg);
 }
 
 .pin-heading > span {
-  width: 28px;
-  height: 42px;
+  width: 22px;
+  height: 32px;
   border: 0;
   border-radius: 18px 18px 18px 0;
   background: radial-gradient(circle at 50% 34%, #fff 0 18%, transparent 19%), #c9413b;
@@ -995,39 +995,48 @@ body[data-page="directions"] .directions-section {
 
 .guide-lines {
   display: grid;
-  gap: 12px;
+  gap: 10px;
   color: var(--color-charcoal);
-  font-size: clamp(1.24rem, 4vw, 1.82rem);
-  line-height: 1.5;
+  font-size: clamp(1.02rem, 3vw, 1.22rem);
+  line-height: 1.55;
+}
+
+.guide-lines p {
+  border-radius: 8px;
+  background: rgba(223, 227, 212, 0.24);
+  padding: 10px 12px;
 }
 
 .guide-lines strong {
-  font-weight: 500;
+  color: var(--color-green);
+  font-weight: 850;
 }
 
 .check-line,
 .dash-line {
   position: relative;
-  padding-left: 42px;
+  padding-left: 38px;
 }
 
 .check-line::before {
   content: "";
   position: absolute;
-  left: 5px;
-  top: 0.33em;
-  width: 20px;
-  height: 10px;
-  border-left: 5px solid currentColor;
-  border-bottom: 5px solid currentColor;
+  left: 14px;
+  top: 1.05em;
+  width: 15px;
+  height: 8px;
+  border-left: 3px solid var(--color-gold);
+  border-bottom: 3px solid var(--color-gold);
   transform: rotate(-45deg);
 }
 
 .dash-line::before {
   content: "-";
   position: absolute;
-  left: 10px;
-  top: 0;
+  left: 16px;
+  top: 10px;
+  color: var(--color-gold);
+  font-weight: 900;
 }
 
 .directions-location-layout {
@@ -1038,23 +1047,23 @@ body[data-page="directions"] .directions-section {
 
 .naver-map-button {
   width: fit-content;
-  min-width: 230px;
-  min-height: 60px;
+  min-width: 180px;
+  min-height: 50px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  margin-top: 30px;
-  border-radius: 0;
+  gap: 10px;
+  margin-top: 22px;
+  border-radius: 8px;
   background: #2fd121;
   color: #fff;
-  padding: 14px 26px;
-  font-size: 1.22rem;
+  padding: 11px 20px;
+  font-size: 1rem;
   font-weight: 800;
 }
 
 .naver-map-button strong {
-  font-size: 1.55rem;
+  font-size: 1.28rem;
   line-height: 1;
 }
 

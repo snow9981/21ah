@@ -15,7 +15,7 @@
   --shadow-card: 0 12px 34px rgba(38, 45, 42, 0.08);
   --radius-card: 8px;
   --container: min(1180px, calc(100% - 32px));
-  --header-height: 116px;
+  --header-height: 124px;
   --font-sans: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
 }
 
@@ -127,36 +127,61 @@ h3 {
   height: var(--header-height);
   margin: 0 auto;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  align-content: center;
   justify-content: space-between;
-  gap: 18px;
+  column-gap: 12px;
+  row-gap: 8px;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 18px;
+  gap: 12px;
   flex: 0 0 auto;
+  max-width: calc(100% - 56px);
   color: var(--color-green);
   white-space: nowrap;
 }
 
 .brand-logo {
   display: block;
-  width: 112px;
+  width: 78px;
   height: auto;
   object-fit: contain;
 }
 
 .brand-name strong {
-  font-size: 2.28rem;
+  font-size: 1.52rem;
   font-weight: 900;
   letter-spacing: 0;
   line-height: 1.08;
 }
 
 .desktop-nav {
-  display: none;
+  order: 3;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  flex: 0 0 100%;
+  width: 100%;
+  gap: 4px;
+  color: var(--color-green-2);
+}
+
+.desktop-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  border: 1px solid rgba(32, 59, 51, 0.13);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.62);
+  padding: 4px 3px;
+  font-size: 0.7rem;
+  font-weight: 850;
+  line-height: 1.18;
+  text-align: center;
 }
 
 .header-actions {
@@ -220,7 +245,9 @@ h3 {
 }
 
 .desktop-nav a[aria-current="page"] {
-  color: var(--color-gold);
+  border-color: rgba(184, 138, 85, 0.34);
+  background: rgba(234, 215, 188, 0.42);
+  color: var(--color-green);
 }
 
 .primary-nav a[aria-current="page"] {
@@ -1370,8 +1397,31 @@ body[data-page="directions"] .directions-section {
 }
 
 @media (min-width: 1080px) {
+  .header-inner {
+    flex-wrap: nowrap;
+    align-content: center;
+    column-gap: 18px;
+    row-gap: 0;
+  }
+
+  .brand {
+    gap: 18px;
+    max-width: none;
+  }
+
+  .brand-logo {
+    width: 112px;
+  }
+
+  .brand-name strong {
+    font-size: 2.28rem;
+  }
+
   .desktop-nav {
     display: flex;
+    order: 0;
+    flex: 0 1 auto;
+    width: auto;
     align-items: center;
     gap: clamp(12px, 1.4vw, 24px);
     color: var(--color-charcoal);
@@ -1379,7 +1429,24 @@ body[data-page="directions"] .directions-section {
     font-weight: 850;
   }
 
+  .desktop-nav a {
+    min-height: auto;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+    line-height: inherit;
+    white-space: nowrap;
+  }
+
   .desktop-nav a:hover {
+    color: var(--color-gold);
+  }
+
+  .desktop-nav a[aria-current="page"] {
+    border-color: transparent;
+    background: transparent;
     color: var(--color-gold);
   }
 
@@ -1485,11 +1552,17 @@ body[data-page="directions"] .directions-section {
   }
 
   .brand-logo {
-    width: 78px;
+    width: 68px;
   }
 
   .brand-name strong {
-    font-size: 1.52rem;
+    font-size: 1.34rem;
+  }
+
+  .desktop-nav a {
+    font-size: 0.66rem;
+    padding-right: 2px;
+    padding-left: 2px;
   }
 
   .button {

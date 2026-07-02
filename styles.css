@@ -1012,19 +1012,26 @@ body[data-page="directions"] .directions-section {
   font-weight: 850;
 }
 
-.check-line,
 .dash-line {
   position: relative;
   padding-left: 38px;
 }
 
+.check-line {
+  position: relative;
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 10px;
+  padding-left: 12px;
+}
+
 .check-line::before {
   content: "";
-  position: absolute;
-  left: 14px;
-  top: 1.05em;
-  width: 15px;
+  position: static;
+  width: 14px;
   height: 8px;
+  margin-left: 2px;
   border-left: 3px solid var(--color-gold);
   border-bottom: 3px solid var(--color-gold);
   transform: rotate(-45deg);

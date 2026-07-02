@@ -248,6 +248,72 @@
     header.classList.toggle("is-scrolled", window.scrollY > 8);
   }
 
+  function initExteriorSlideshow() {
+    if (document.body.dataset.page !== "home") return;
+
+    const wrap = document.querySelector(".clinic-photo-wrap");
+    if (!wrap || wrap.dataset.slideshowReady === "true") return;
+
+    const originalImage = wrap.querySelector("img");
+    const fallbackAlt = originalImage ? originalImage.getAttribute("alt") : "스물하나 동물병원 외관 사진";
+    const slides = [
+      {
+        image: "assets/images/exterior-slide-1.png",
+        title: "스무 살을 넘어, 스물하나까지.",
+        text: "오래 함께하는 시간을 위해 진료합니다."
+      },
+      {
+        image: "assets/images/exterior-slide-2.png",
+        title: "정확한 진단과 충분한 설명.",
+        text: "보호자가 이해할 수 있도록 차분히 안내합니다."
+      },
+      {
+        image: "assets/images/exterior-slide-3.png",
+        title: "아이에게 필요한 만큼.",
+        text: "검사 전 이유와 선택지를 먼저 설명합니다."
+      },
+      {
+        image: "assets/images/exterior-slide-4.png",
+        title: "보호자가 납득할 수 있는 진료.",
+        text: "필요한 진료의 우선순위를 함께 정합니다."
+      }
+    ];
+
+    wrap.classList.add("clinic-slideshow");
+    wrap.dataset.slideshowReady = "true";
+    wrap.innerHTML = "";
+
+    slides.forEach(function (slide, index) {
+      const figure = document.createElement("figure");
+      const image = document.createElement("img");
+      const caption = document.createElement("figcaption");
+      const title = document.createElement("strong");
+      const text = document.createElement("span");
+
+      figure.className = "clinic-photo-slide" + (index === 0 ? " is-active" : "");
+      image.src = slide.image;
+      image.alt = fallbackAlt;
+      title.textContent = slide.title;
+      text.textContent = slide.text;
+      caption.className = "clinic-slide-caption";
+
+      caption.append(title, text);
+      figure.append(image, caption);
+      wrap.appendChild(figure);
+    });
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let activeIndex = 0;
+    const slideElements = wrap.querySelectorAll(".clinic-photo-slide");
+
+    window.setInterval(function () {
+      slideElements[activeIndex].classList.remove("is-active");
+      activeIndex = (activeIndex + 1) % slideElements.length;
+      slideElements[activeIndex].classList.add("is-active");
+    }, 3000);
+  }
+
   function closeMenu() {
     if (!menuToggle || !nav) return;
     document.body.classList.remove("menu-open");
@@ -285,5 +351,6 @@
   });
 
   applyEditableContentWhenReady(0);
+  initExteriorSlideshow();
   setHeaderState();
 })();

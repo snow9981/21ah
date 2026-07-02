@@ -533,6 +533,66 @@ body[data-page="directions"] .directions-section {
   box-shadow: var(--shadow-soft);
 }
 
+.clinic-photo-wrap.clinic-slideshow {
+  display: block;
+  aspect-ratio: 16 / 9.6;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--color-green);
+  box-shadow: var(--shadow-soft);
+}
+
+.clinic-photo-slide {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 650ms ease;
+}
+
+.clinic-photo-slide.is-active {
+  z-index: 1;
+  opacity: 1;
+}
+
+.clinic-photo-wrap.clinic-slideshow img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  border-radius: 0;
+  object-fit: cover;
+  object-position: center 120%;
+  box-shadow: none;
+}
+
+.clinic-slide-caption {
+  position: absolute;
+  right: clamp(18px, 4vw, 54px);
+  bottom: clamp(18px, 4vw, 48px);
+  z-index: 2;
+  display: grid;
+  gap: 7px;
+  max-width: min(430px, calc(100% - 36px));
+  color: #fffdf8;
+  text-align: right;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.34);
+}
+
+.clinic-slide-caption strong {
+  font-size: clamp(1.45rem, 4vw, 2.7rem);
+  font-weight: 900;
+  line-height: 1.12;
+}
+
+.clinic-slide-caption span {
+  color: rgba(255, 253, 248, 0.86);
+  font-size: clamp(0.9rem, 2.2vw, 1.08rem);
+  font-weight: 750;
+}
+
 .first-photo + .hero {
   min-height: auto;
   padding-top: 70px;
@@ -1631,6 +1691,21 @@ body[data-page="directions"] .directions-section {
   .clinic-photo-wrap img {
     aspect-ratio: 3.6 / 3;
     object-position: center center;
+  }
+
+  .clinic-photo-wrap.clinic-slideshow {
+    aspect-ratio: 3.6 / 3;
+  }
+
+  .clinic-photo-wrap.clinic-slideshow img {
+    object-position: center center;
+  }
+
+  .clinic-slide-caption {
+    right: 18px;
+    bottom: 18px;
+    left: 18px;
+    text-align: left;
   }
 
   .clinic-gallery-media img {

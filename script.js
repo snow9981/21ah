@@ -122,10 +122,10 @@
   function applyPageMetadata() {
     const page = document.body.dataset.page;
     const pageTitles = {
-      home: window.SITE_CONTENT.seo && window.SITE_CONTENT.seo.title,
-      care: "진료안내 | 스물하나 동물병원",
-      team: "의료진소개 | 스물하나 동물병원",
-      philosophy: "진료철학 | 스물하나 동물병원"
+      home: "인사말 | 스물하나 동물병원",
+      team: "의료진 소개 | 스물하나 동물병원",
+      facilities: "병원시설 및 장비 소개 | 스물하나 동물병원",
+      directions: "진료시간 및 오시는 길 | 스물하나 동물병원"
     };
 
     if (page && pageTitles[page]) {

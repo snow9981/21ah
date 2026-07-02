@@ -9,9 +9,11 @@
 ```text
 .
 ├── index.html
-├── care.html
 ├── team.html
-├── philosophy.html
+├── facilities.html
+├── directions.html
+├── care.html          # 예전 주소 호환용 redirect
+├── philosophy.html    # 예전 주소 호환용 redirect
 ├── content.js
 ├── editor.html
 ├── styles.css
@@ -53,7 +55,7 @@ http://127.0.0.1:8765/editor.html
 2. 수정하고 싶은 문구를 입력창에서 바꿉니다.
 3. `content.js 저장` 버튼을 누릅니다.
 4. 저장한 파일을 이 폴더의 기존 `content.js`와 교체합니다.
-5. `index.html`, `care.html`, `team.html`, `philosophy.html`을 새로고침해 변경 내용을 확인합니다.
+5. `index.html`, `team.html`, `facilities.html`, `directions.html`을 새로고침해 변경 내용을 확인합니다.
 
 Chrome 또는 Edge에서는 저장 창에서 기존 `content.js`를 선택해 덮어쓸 수 있습니다. 브라우저가 직접 저장을 지원하지 않으면 `content.js`가 다운로드되며, 다운로드된 파일을 이 폴더로 옮겨 기존 파일과 교체하면 됩니다.
 
@@ -119,7 +121,7 @@ python3 -m http.server 8765
 
 ```text
 http://127.0.0.1:8765/index.html
-http://127.0.0.1:8765/care.html
 http://127.0.0.1:8765/team.html
-http://127.0.0.1:8765/philosophy.html
+http://127.0.0.1:8765/facilities.html
+http://127.0.0.1:8765/directions.html
 ```

@@ -234,7 +234,8 @@ body[data-page] .focus-section,
 body[data-page] .trust-section,
 body[data-page] .clinic-gallery-section,
 body[data-page] .final-cta-section,
-body[data-page] .price-notice {
+body[data-page] .price-notice,
+body[data-page] .directions-section {
   display: none;
 }
 
@@ -248,16 +249,10 @@ body[data-page]:not([data-page="home"]) main {
   padding-top: var(--header-height);
 }
 
-body[data-page="care"] .focus-section,
-body[data-page="care"] .clinic-gallery-section,
+body[data-page="facilities"] .clinic-gallery-section,
 body[data-page="team"] .collaboration-section,
-body[data-page="philosophy"] .philosophy-section,
-body[data-page="philosophy"] .trust-section {
+body[data-page="directions"] .directions-section {
   display: block;
-}
-
-body[data-page="care"] .price-notice {
-  display: grid;
 }
 
 .hero {
@@ -266,7 +261,6 @@ body[data-page="care"] .price-notice {
   overflow: hidden;
   padding: calc(var(--header-height) + 44px) 0 34px;
   background:
-    linear-gradient(90deg, rgba(251, 247, 239, 0.98) 0%, rgba(251, 247, 239, 0.92) 42%, rgba(251, 247, 239, 0.35) 64%, rgba(251, 247, 239, 0.12) 100%),
     radial-gradient(circle at 82% 16%, rgba(255, 255, 255, 0.82), transparent 24%),
     linear-gradient(135deg, #fbf5ea 0%, #fffdf8 50%, #e8ddcb 100%);
 }
@@ -278,140 +272,6 @@ body[data-page="care"] .price-notice {
   height: 168px;
   background: linear-gradient(180deg, rgba(175, 186, 167, 0), rgba(116, 131, 113, 0.58));
   pointer-events: none;
-}
-
-.hero-visual {
-  position: absolute;
-  inset: 0 0 0 auto;
-  width: min(48vw, 760px);
-  min-width: 420px;
-  pointer-events: none;
-}
-
-.sun-wash {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 54% 20%, rgba(255, 255, 255, 0.92), transparent 21%),
-    linear-gradient(90deg, rgba(255, 253, 248, 0), rgba(255, 253, 248, 0.42) 28%, rgba(214, 184, 140, 0.28) 100%);
-}
-
-.sun-wash::before,
-.sun-wash::after {
-  content: "";
-  position: absolute;
-  background: rgba(255, 253, 248, 0.58);
-  filter: blur(2px);
-}
-
-.sun-wash::before {
-  width: 74px;
-  height: 100%;
-  left: 30%;
-  top: 0;
-}
-
-.sun-wash::after {
-  width: 42px;
-  height: 100%;
-  left: 47%;
-  top: 0;
-}
-
-.pet-portrait {
-  position: absolute;
-  right: -42px;
-  bottom: 116px;
-  width: min(39vw, 560px);
-  min-width: 330px;
-  aspect-ratio: 1 / 0.82;
-  opacity: 0.96;
-}
-
-.dog-body,
-.dog-head,
-.cat-body,
-.cat-head {
-  position: absolute;
-  box-shadow: inset 0 12px 22px rgba(255, 255, 255, 0.44), 0 22px 42px rgba(98, 74, 48, 0.12);
-}
-
-.dog-body {
-  right: 0;
-  bottom: 0;
-  width: 72%;
-  height: 52%;
-  border-radius: 58% 42% 12% 18% / 62% 52% 20% 18%;
-  background: linear-gradient(135deg, #e7bd82, #c58b4f 54%, #a66e3c);
-}
-
-.dog-head {
-  right: 17%;
-  top: 7%;
-  width: 44%;
-  height: 45%;
-  border-radius: 48% 52% 45% 45%;
-  background: radial-gradient(circle at 60% 42%, #27322e 0 2.5%, transparent 3.2%), linear-gradient(135deg, #f1cc95, #d2995d 62%, #ad7340);
-}
-
-.dog-head::before {
-  content: "";
-  position: absolute;
-  right: -12%;
-  top: 18%;
-  width: 24%;
-  height: 54%;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #c78a4e, #9f693a);
-  transform: rotate(-18deg);
-}
-
-.dog-head::after {
-  content: "";
-  position: absolute;
-  left: 10%;
-  top: 45%;
-  width: 36%;
-  height: 20%;
-  border-radius: 52% 48% 46% 54%;
-  background: rgba(83, 54, 36, 0.32);
-}
-
-.cat-body {
-  left: 5%;
-  bottom: 3%;
-  width: 46%;
-  height: 42%;
-  border-radius: 45% 55% 16% 20% / 68% 58% 20% 20%;
-  background: linear-gradient(135deg, #f2e3cf, #d9c0a3 58%, #b99570);
-}
-
-.cat-head {
-  left: 18%;
-  top: 30%;
-  width: 30%;
-  height: 29%;
-  border-radius: 48% 52% 44% 46%;
-  background: radial-gradient(circle at 62% 46%, #27322e 0 3%, transparent 3.8%), linear-gradient(135deg, #f8ead6, #d5b896);
-}
-
-.cat-head::before,
-.cat-head::after {
-  content: "";
-  position: absolute;
-  top: -14%;
-  width: 28%;
-  height: 32%;
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-  background: #d9bea0;
-}
-
-.cat-head::before {
-  left: 12%;
-}
-
-.cat-head::after {
-  right: 12%;
 }
 
 .hero-inner {
@@ -632,6 +492,7 @@ body[data-page="care"] .price-notice {
 .final-cta p,
 .photo-placeholder p,
 .price-notice p,
+.directions-panel p,
 .footer-brand p {
   color: var(--color-muted);
 }
@@ -793,7 +654,8 @@ body[data-page="care"] .price-notice {
 .trust-panel,
 .photo-placeholder,
 .final-cta,
-.price-notice {
+.price-notice,
+.directions-panel {
   border: 1px solid var(--color-line);
   border-radius: var(--radius-card);
   background: rgba(255, 253, 248, 0.92);
@@ -968,6 +830,42 @@ body[data-page="care"] .price-notice {
   font-size: 1.35rem;
 }
 
+.directions-panel {
+  display: grid;
+  gap: 26px;
+  padding: clamp(24px, 6vw, 46px);
+}
+
+.directions-info {
+  display: grid;
+  gap: 12px;
+}
+
+.directions-info div {
+  display: grid;
+  gap: 6px;
+  border: 1px solid rgba(32, 59, 51, 0.12);
+  border-radius: 8px;
+  background: rgba(223, 227, 212, 0.26);
+  padding: 16px;
+}
+
+.directions-info dt {
+  color: var(--color-gold);
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.directions-info dd {
+  margin: 0;
+  color: var(--color-green);
+  font-weight: 750;
+}
+
+.directions-actions {
+  margin-top: 4px;
+}
+
 .button-price {
   background: var(--color-gold);
   color: #fff;
@@ -1136,6 +1034,10 @@ body[data-page="care"] .price-notice {
     align-items: center;
   }
 
+  .directions-info {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .cta-row-wide .button {
     min-width: 132px;
   }
@@ -1161,8 +1063,9 @@ body[data-page="care"] .price-notice {
   .desktop-nav {
     display: flex;
     align-items: center;
-    gap: clamp(18px, 2.2vw, 38px);
+    gap: clamp(12px, 1.4vw, 24px);
     color: var(--color-charcoal);
+    font-size: 0.96rem;
     font-weight: 850;
   }
 
@@ -1171,10 +1074,14 @@ body[data-page="care"] .price-notice {
   }
 
   .header-text-link {
-    display: inline-flex;
+    display: none;
     color: var(--color-green);
     font-weight: 850;
     white-space: nowrap;
+  }
+
+  .menu-toggle {
+    display: none;
   }
 
   .header-text-link:hover {
@@ -1233,18 +1140,6 @@ body[data-page="care"] .price-notice {
 }
 
 @media (max-width: 767px) {
-  .hero-visual {
-    opacity: 0.24;
-    width: 100%;
-    min-width: 0;
-  }
-
-  .pet-portrait {
-    right: -110px;
-    bottom: 280px;
-    min-width: 360px;
-  }
-
   .hero-footer-line {
     grid-template-columns: 1fr;
     color: var(--color-green);

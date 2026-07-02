@@ -8,10 +8,12 @@ window.SITE_CONTENT = {
     "englishName": "SMULHANA ANIMAL HOSPITAL"
   },
   "nav": {
-    "intro": "병원소개",
+    "intro": "인사말",
     "care": "진료안내",
-    "team": "의료진소개",
+    "team": "의료진 소개",
     "philosophy": "진료철학",
+    "facilities": "병원시설 및 장비 소개",
+    "directions": "진료시간 및 오시는 길",
     "kakao": "카카오톡 상담",
     "blog": "블로그",
     "blogView": "블로그 보기",
@@ -35,12 +37,12 @@ window.SITE_CONTENT = {
   },
   "quick": {
     "place": {
-      "title": "진료안내",
-      "text": "진료시간 및 오시는 길"
+      "title": "진료시간 및 오시는 길",
+      "text": "위치와 운영시간 확인"
     },
     "checkup": {
-      "title": "건강검진센터",
-      "text": "아이의 건강을 미리 체크"
+      "title": "병원시설 및 장비",
+      "text": "공간과 장비 소개"
     },
     "kakao": {
       "title": "상담문의",

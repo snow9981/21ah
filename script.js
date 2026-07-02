@@ -125,7 +125,8 @@
       home: "인사말 | 스물하나 동물병원",
       team: "의료진 소개 | 스물하나 동물병원",
       facilities: "병원시설 및 장비 소개 | 스물하나 동물병원",
-      directions: "진료시간 및 오시는 길 | 스물하나 동물병원"
+      directions: "진료시간 및 오시는 길 | 스물하나 동물병원",
+      price: "주요 진료비용 안내 | 스물하나 동물병원"
     };
 
     if (page && pageTitles[page]) {
@@ -214,13 +215,13 @@
         bodySelector: "p, a"
       },
       price: {
-        selector: ".price-notice",
+        selector: ".price-notice, .price-page-section",
         titleSelector: "h2",
         bodySelector: "p, a"
       },
       footer: {
         selector: ".site-footer",
-        titleSelector: ".footer-brand strong",
+        titleSelector: ".footer-brand p",
         bodySelector: "p, dt, dd, a"
       }
     };

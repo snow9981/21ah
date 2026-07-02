@@ -1234,6 +1234,52 @@ body[data-page="directions"] .directions-section {
   box-shadow: 0 12px 26px rgba(184, 138, 85, 0.2);
 }
 
+.simple-page-main {
+  padding-top: var(--header-height);
+}
+
+.price-page-section {
+  width: var(--container);
+  margin: 0 auto;
+}
+
+.price-guide-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.price-guide-card,
+.price-note-panel {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: rgba(255, 253, 248, 0.9);
+  box-shadow: var(--shadow-card);
+  padding: 22px;
+}
+
+.price-guide-card {
+  display: grid;
+  gap: 10px;
+}
+
+.price-guide-card h2,
+.price-note-panel h2 {
+  font-size: clamp(1.18rem, 4vw, 1.55rem);
+}
+
+.price-guide-card p,
+.price-note-panel p {
+  color: var(--color-green-2);
+  font-weight: 650;
+}
+
+.price-note-panel {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+
 .site-footer {
   margin-top: 72px;
   background: #152d27;
@@ -1257,11 +1303,6 @@ body[data-page="directions"] .directions-section {
   width: min(260px, 82vw);
   height: auto;
   display: block;
-}
-
-.footer-brand strong {
-  color: #fff7e8;
-  font-size: 1.25rem;
 }
 
 .footer-brand p {
@@ -1355,6 +1396,10 @@ body[data-page="directions"] .directions-section {
   .quick-actions a {
     position: relative;
     padding: 24px 28px;
+  }
+
+  .price-guide-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .quick-actions a + a::before {
@@ -1559,6 +1604,11 @@ body[data-page="directions"] .directions-section {
 }
 
 @media (max-width: 767px) {
+  .footer-brand {
+    justify-items: center;
+    text-align: center;
+  }
+
   .hero-footer-line {
     grid-template-columns: 1fr;
     color: var(--color-green);

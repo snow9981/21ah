@@ -922,8 +922,157 @@ body[data-page="directions"] .directions-section {
 
 .directions-panel {
   display: grid;
-  gap: 26px;
+  gap: 34px;
   padding: clamp(24px, 6vw, 46px);
+}
+
+.directions-guide-block {
+  display: grid;
+  gap: 22px;
+}
+
+.directions-guide-block + .directions-guide-block {
+  border-top: 1px solid rgba(32, 59, 51, 0.12);
+  padding-top: 34px;
+}
+
+.guide-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-charcoal);
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 900;
+}
+
+.guide-heading > span {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  border: 3px solid rgba(32, 59, 51, 0.28);
+  border-radius: 50%;
+  background: radial-gradient(circle, #f8faf9 0 58%, #9aa49e 59% 100%);
+  box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.55);
+}
+
+.guide-heading > span::before,
+.guide-heading > span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 14px;
+  border-radius: 999px;
+  background: #4b514e;
+  transform-origin: 50% 0;
+}
+
+.guide-heading > span::before {
+  transform: translate(-50%, -1px);
+}
+
+.guide-heading > span::after {
+  height: 11px;
+  transform: translate(-50%, -1px) rotate(90deg);
+}
+
+.pin-heading > span {
+  width: 28px;
+  height: 42px;
+  border: 0;
+  border-radius: 18px 18px 18px 0;
+  background: radial-gradient(circle at 50% 34%, #fff 0 18%, transparent 19%), #c9413b;
+  transform: rotate(-45deg);
+  box-shadow: 0 8px 14px rgba(201, 65, 59, 0.22);
+}
+
+.pin-heading > span::before,
+.pin-heading > span::after {
+  display: none;
+}
+
+.guide-lines {
+  display: grid;
+  gap: 12px;
+  color: var(--color-charcoal);
+  font-size: clamp(1.24rem, 4vw, 1.82rem);
+  line-height: 1.5;
+}
+
+.guide-lines strong {
+  font-weight: 500;
+}
+
+.check-line,
+.dash-line {
+  position: relative;
+  padding-left: 42px;
+}
+
+.check-line::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 0.33em;
+  width: 20px;
+  height: 10px;
+  border-left: 5px solid currentColor;
+  border-bottom: 5px solid currentColor;
+  transform: rotate(-45deg);
+}
+
+.dash-line::before {
+  content: "-";
+  position: absolute;
+  left: 10px;
+  top: 0;
+}
+
+.directions-location-layout {
+  display: grid;
+  gap: 24px;
+  align-items: start;
+}
+
+.naver-map-button {
+  width: fit-content;
+  min-width: 230px;
+  min-height: 60px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 30px;
+  border-radius: 0;
+  background: #2fd121;
+  color: #fff;
+  padding: 14px 26px;
+  font-size: 1.22rem;
+  font-weight: 800;
+}
+
+.naver-map-button strong {
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.map-frame {
+  min-height: 320px;
+  overflow: hidden;
+  border: 1px solid rgba(32, 59, 51, 0.12);
+  border-radius: 8px;
+  background: rgba(223, 227, 212, 0.28);
+  box-shadow: var(--shadow-card);
+}
+
+.map-frame iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  display: block;
+  border: 0;
 }
 
 .directions-info {
@@ -1177,6 +1326,10 @@ body[data-page="directions"] .directions-section {
 
   .directions-info {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .directions-location-layout {
+    grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
   }
 
   .cta-row-wide .button {

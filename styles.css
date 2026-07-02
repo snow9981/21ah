@@ -509,6 +509,37 @@ body[data-page="directions"] .directions-section {
   box-shadow: var(--shadow-card);
 }
 
+.promise-grid {
+  display: grid;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.promise-card {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: rgba(255, 253, 248, 0.9);
+  padding: 22px;
+  box-shadow: var(--shadow-card);
+}
+
+.promise-card span {
+  color: var(--color-gold);
+  font-size: 0.84rem;
+  font-weight: 950;
+  letter-spacing: 0.14em;
+}
+
+.promise-card h3 {
+  font-size: 1.16rem;
+}
+
+.promise-card p {
+  color: var(--color-muted);
+}
+
 .philosophy-section,
 .focus-section {
   width: 100%;
@@ -745,6 +776,65 @@ body[data-page="directions"] .directions-section {
   color: rgba(255, 253, 248, 0.78);
 }
 
+.facilities-layout {
+  display: grid;
+  gap: 28px;
+}
+
+.facility-feature {
+  display: grid;
+  gap: 18px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: rgba(255, 253, 248, 0.92);
+  padding: clamp(18px, 4vw, 28px);
+  box-shadow: var(--shadow-soft);
+}
+
+.facility-feature-copy {
+  display: grid;
+  align-content: center;
+  gap: 12px;
+}
+
+.facility-feature-copy p,
+.facility-card p {
+  color: var(--color-muted);
+}
+
+.facility-card-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.facility-card {
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: rgba(255, 253, 248, 0.9);
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.media-placeholder,
+.route-placeholder {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  border: 1.5px dashed rgba(32, 59, 51, 0.24);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(223, 227, 212, 0.28), rgba(255, 253, 248, 0.88));
+  color: rgba(32, 59, 51, 0.58);
+  font-weight: 850;
+  text-align: center;
+}
+
+.facility-feature > .media-placeholder {
+  min-height: 360px;
+}
+
 .final-cta {
   display: grid;
   gap: 18px;
@@ -839,6 +929,44 @@ body[data-page="directions"] .directions-section {
 .directions-info {
   display: grid;
   gap: 12px;
+}
+
+.hours-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.hours-card {
+  display: grid;
+  gap: 8px;
+  border: 1px solid rgba(32, 59, 51, 0.12);
+  border-radius: 8px;
+  background: rgba(223, 227, 212, 0.26);
+  padding: 18px;
+}
+
+.hours-card span {
+  color: var(--color-gold);
+  font-size: 0.9rem;
+  font-weight: 950;
+}
+
+.hours-card strong {
+  color: var(--color-green);
+  font-size: clamp(1.38rem, 5vw, 2.1rem);
+  line-height: 1.1;
+}
+
+.hours-card p {
+  color: var(--color-muted);
+}
+
+.hours-card.is-closed {
+  background: rgba(234, 215, 188, 0.26);
+}
+
+.route-placeholder {
+  min-height: 320px;
 }
 
 .directions-info div {
@@ -1018,6 +1146,10 @@ body[data-page="directions"] .directions-section {
     grid-template-columns: repeat(3, 1fr);
   }
 
+  .promise-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .doctor-profile-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 22px;
@@ -1029,13 +1161,22 @@ body[data-page="directions"] .directions-section {
     align-items: center;
   }
 
+  .facility-feature {
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  }
+
+  .facility-card-grid,
+  .hours-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .price-notice {
     grid-template-columns: 1fr auto;
     align-items: center;
   }
 
   .directions-info {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .cta-row-wide .button {

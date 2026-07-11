@@ -283,35 +283,77 @@
     wrap.dataset.slideshowReady = "true";
     wrap.innerHTML = "";
 
+    const hero = wrap.closest(".home-hero");
+    const message = hero ? hero.querySelector(".hero-slide-message") : null;
+    const dotList = hero ? hero.querySelector(".hero-slide-dots") : null;
+
     slides.forEach(function (slide, index) {
       const figure = document.createElement("figure");
       const image = document.createElement("img");
-      const caption = document.createElement("figcaption");
-      const title = document.createElement("strong");
-      const text = document.createElement("span");
 
       figure.className = "clinic-photo-slide" + (index === 0 ? " is-active" : "");
       image.src = slide.image;
       image.alt = fallbackAlt;
-      title.textContent = slide.title;
-      text.textContent = slide.text;
-      caption.className = "clinic-slide-caption";
+      image.loading = index === 0 ? "eager" : "lazy";
+      figure.setAttribute("aria-hidden", index === 0 ? "false" : "true");
 
-      caption.append(title, text);
-      figure.append(image, caption);
+      figure.append(image);
       wrap.appendChild(figure);
-    });
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (dotList) {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "hero-slide-dot" + (index === 0 ? " is-active" : "");
+        dot.setAttribute("aria-label", String(index + 1) + "번째 사진 보기");
+        dot.setAttribute("aria-pressed", index === 0 ? "true" : "false");
+        dot.dataset.slideIndex = String(index);
+        dotList.appendChild(dot);
+      }
+    });
 
     let activeIndex = 0;
     const slideElements = wrap.querySelectorAll(".clinic-photo-slide");
+    const dots = dotList ? dotList.querySelectorAll(".hero-slide-dot") : [];
+    let timer = null;
 
-    window.setInterval(function () {
+    function showSlide(nextIndex) {
       slideElements[activeIndex].classList.remove("is-active");
-      activeIndex = (activeIndex + 1) % slideElements.length;
+      slideElements[activeIndex].setAttribute("aria-hidden", "true");
+      if (dots[activeIndex]) {
+        dots[activeIndex].classList.remove("is-active");
+        dots[activeIndex].setAttribute("aria-pressed", "false");
+      }
+
+      activeIndex = nextIndex;
       slideElements[activeIndex].classList.add("is-active");
-    }, 3000);
+      slideElements[activeIndex].setAttribute("aria-hidden", "false");
+      if (dots[activeIndex]) {
+        dots[activeIndex].classList.add("is-active");
+        dots[activeIndex].setAttribute("aria-pressed", "true");
+      }
+
+      if (message) {
+        message.querySelector("strong").textContent = slides[activeIndex].title;
+        message.querySelector("span").textContent = slides[activeIndex].text;
+      }
+    }
+
+    function startTimer() {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      window.clearInterval(timer);
+      timer = window.setInterval(function () {
+        showSlide((activeIndex + 1) % slideElements.length);
+      }, 3000);
+    }
+
+    dots.forEach(function (dot) {
+      dot.addEventListener("click", function () {
+        showSlide(Number(dot.dataset.slideIndex));
+        startTimer();
+      });
+    });
+
+    startTimer();
   }
 
   function closeMenu() {

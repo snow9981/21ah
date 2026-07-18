@@ -262,31 +262,15 @@ h3 {
   color: var(--color-green);
 }
 
-body[data-page] .philosophy-section,
-body[data-page] .collaboration-section,
-body[data-page] .focus-section,
-body[data-page] .trust-section,
-body[data-page] .clinic-gallery-section,
-body[data-page] .final-cta-section,
-body[data-page] .price-notice,
-body[data-page] .directions-section {
+body[data-page="home"] .philosophy-section,
+body[data-page="home"] .collaboration-section,
+body[data-page="home"] .focus-section,
+body[data-page="home"] .trust-section,
+body[data-page="home"] .clinic-gallery-section,
+body[data-page="home"] .final-cta-section,
+body[data-page="home"] .price-notice,
+body[data-page="home"] .directions-section {
   display: none;
-}
-
-body[data-page]:not([data-page="home"]) .clinic-photo-band,
-body[data-page]:not([data-page="home"]) .hero,
-body[data-page]:not([data-page="home"]) .story-section {
-  display: none;
-}
-
-body[data-page]:not([data-page="home"]) main {
-  padding-top: var(--header-height);
-}
-
-body[data-page="facilities"] .clinic-gallery-section,
-body[data-page="team"] .collaboration-section,
-body[data-page="directions"] .directions-section {
-  display: block;
 }
 
 .hero {
@@ -2800,6 +2784,56 @@ body[data-page]:not([data-page="home"]) .section-header {
   }
 }
 
+@media (max-width: 1023px) {
+  :root {
+    --header-height: 120px;
+  }
+
+  .header-inner {
+    flex-wrap: wrap;
+    align-content: center;
+    row-gap: 4px;
+  }
+
+  .desktop-nav {
+    order: 3;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    flex: 0 0 100%;
+    width: 100%;
+    gap: 4px;
+  }
+
+  .desktop-nav a {
+    display: inline-flex;
+    min-height: 32px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(23, 61, 50, 0.13);
+    border-radius: 5px;
+    background: #fff;
+    padding: 4px 3px;
+    color: var(--color-green-2);
+    font-size: 0.68rem;
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .desktop-nav a[aria-current="page"] {
+    border-color: rgba(169, 120, 66, 0.36);
+    background: #f4ecdf;
+    color: var(--color-green);
+  }
+
+  .primary-nav a[href="index.html"],
+  .primary-nav a[href="team.html"],
+  .primary-nav a[href="facilities.html"],
+  .primary-nav a[href="directions.html"] {
+    display: none;
+  }
+}
+
 @media (min-width: 768px) and (max-width: 1023px) {
   :root {
     --container: min(100% - 48px, 1200px);
@@ -2818,7 +2852,7 @@ body[data-page]:not([data-page="home"]) .section-header {
 @media (max-width: 767px) {
   :root {
     --container: min(100% - 24px, 1200px);
-    --header-height: 72px;
+    --header-height: 116px;
   }
 
   body {

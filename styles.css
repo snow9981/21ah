@@ -1949,7 +1949,7 @@ body[data-page]:not([data-page="home"]) main,
 }
 
 .home-hero .hero-copy {
-  width: min(920px, 100%);
+  width: min(840px, 100%);
   max-width: none;
   justify-items: center;
   gap: 0;
@@ -1958,24 +1958,25 @@ body[data-page]:not([data-page="home"]) main,
 }
 
 .home-hero h1 {
-  max-width: 900px;
-  margin-bottom: 24px;
+  max-width: 780px;
+  margin-bottom: 20px;
   color: #fff;
   font-family: var(--font-sans);
-  font-size: 4.05rem;
+  font-size: 3.4rem;
   font-weight: 700;
-  line-height: 1.12;
+  line-height: 1.18;
   white-space: pre-line;
-  text-shadow: 0 3px 26px rgba(0, 0, 0, 0.32);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.38);
 }
 
 .home-hero .hero-description {
-  max-width: 720px;
-  margin-bottom: 30px;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 1.1rem;
+  max-width: 660px;
+  margin-bottom: 28px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 1.04rem;
   font-weight: 500;
-  line-height: 1.72;
+  line-height: 1.76;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.3);
 }
 
 .home-hero h1,
@@ -2581,6 +2582,11 @@ body[data-page]:not([data-page="home"]) .section-header {
   gap: 36px 72px;
 }
 
+.footer-brand {
+  justify-items: center;
+  text-align: center;
+}
+
 .footer-logo {
   width: min(220px, 70vw);
 }
@@ -2681,6 +2687,21 @@ body[data-page]:not([data-page="home"]) .section-header {
   .mobile-sticky-cta {
     display: none;
   }
+
+  .footer-inner {
+    grid-template-columns: minmax(300px, 0.85fr) minmax(0, 1.65fr);
+    gap: 36px 64px;
+  }
+
+  .footer-info {
+    grid-template-columns: 1.15fr 0.8fr 1.25fr;
+    gap: 18px;
+    align-items: start;
+  }
+
+  .footer-info div:last-child {
+    grid-column: auto;
+  }
 }
 
 @media (max-width: 1023px) {
@@ -2737,7 +2758,7 @@ body[data-page]:not([data-page="home"]) .section-header {
   }
 
   .home-hero h1 {
-    font-size: 3.25rem;
+    font-size: 2.9rem;
   }
 
   .facility-card-grid {
@@ -2824,18 +2845,18 @@ body[data-page]:not([data-page="home"]) .section-header {
   }
 
   .home-hero .hero-description {
-    max-width: 350px;
-    margin-bottom: 24px;
-    font-size: 0.94rem;
+    max-width: 342px;
+    margin-bottom: 22px;
+    font-size: 0.92rem;
     font-weight: 500;
-    line-height: 1.68;
+    line-height: 1.72;
   }
 
   .home-hero h1 {
-    max-width: 360px;
-    margin-bottom: 18px;
-    font-size: 2.48rem;
-    line-height: 1.17;
+    max-width: 344px;
+    margin-bottom: 16px;
+    font-size: 2.12rem;
+    line-height: 1.2;
   }
 
   .hero-primary-actions {

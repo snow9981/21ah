@@ -2309,9 +2309,20 @@ body[data-page="directions"] .site-footer {
   line-height: 1.45;
 }
 
-.hours-schedule .is-closed dt,
+.hours-schedule .is-closed dt {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .hours-schedule .is-closed dd {
-  color: var(--color-gold);
+  grid-column: 1 / -1;
+  color: #ad4b45;
+  font-weight: 750;
 }
 
 .directions-location-layout {

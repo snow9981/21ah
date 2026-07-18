@@ -259,23 +259,23 @@
     const slides = [
       {
         image: "assets/images/exterior-slide-1.png",
-        title: "스무 살을 넘어, 스물하나까지.",
-        text: "오래 함께하는 시간을 위해 진료합니다."
+        title: "스무 살의 바램에\n한 살을 더합니다.",
+        description: "정확한 진단과 충분한 설명, 보호자와 함께하는 꾸준한 관리로 아이의 시간을 더 오래 지키고 싶습니다."
       },
       {
         image: "assets/images/exterior-slide-2.png",
-        title: "정확한 진단과 충분한 설명.",
-        text: "보호자가 이해할 수 있도록 차분히 안내합니다."
+        title: "스무 살을 넘어,\n스물하나까지.",
+        description: "오래 사는 것만이 아니라, 아이가 보호자 곁에서 더 건강한 하루를 보낼 수 있도록 돕겠습니다."
       },
       {
         image: "assets/images/exterior-slide-3.png",
-        title: "아이에게 필요한 만큼.",
-        text: "검사 전 이유와 선택지를 먼저 설명합니다."
+        title: "정확한 진단과\n충분한 설명.",
+        description: "무엇을 확인하려는지, 왜 필요한지부터 보호자가 이해할 수 있도록 차분하게 설명하겠습니다."
       },
       {
         image: "assets/images/exterior-slide-4.png",
-        title: "보호자가 납득할 수 있는 진료.",
-        text: "필요한 진료의 우선순위를 함께 정합니다."
+        title: "아이에게 필요한 만큼,\n납득할 수 있도록.",
+        description: "한 가지 결과로 서둘러 결론 내리지 않고, 아이의 상태와 보호자의 이야기를 함께 살피겠습니다."
       }
     ];
 
@@ -284,7 +284,9 @@
     wrap.innerHTML = "";
 
     const hero = wrap.closest(".home-hero");
-    const message = hero ? hero.querySelector(".hero-slide-message") : null;
+    const heroCopy = hero ? hero.querySelector(".hero-copy") : null;
+    const heroTitle = heroCopy ? heroCopy.querySelector("h1") : null;
+    const heroDescription = heroCopy ? heroCopy.querySelector(".hero-description") : null;
     const dotList = hero ? hero.querySelector(".hero-slide-dots") : null;
 
     slides.forEach(function (slide, index) {
@@ -315,6 +317,12 @@
     const slideElements = wrap.querySelectorAll(".clinic-photo-slide");
     const dots = dotList ? dotList.querySelectorAll(".hero-slide-dot") : [];
     let timer = null;
+    let copyChangeTimer = null;
+
+    function updateHeroCopy(slide) {
+      if (heroTitle) heroTitle.textContent = slide.title;
+      if (heroDescription) heroDescription.textContent = slide.description;
+    }
 
     function showSlide(nextIndex) {
       slideElements[activeIndex].classList.remove("is-active");
@@ -332,9 +340,18 @@
         dots[activeIndex].setAttribute("aria-pressed", "true");
       }
 
-      if (message) {
-        message.querySelector("strong").textContent = slides[activeIndex].title;
-        message.querySelector("span").textContent = slides[activeIndex].text;
+      if (heroCopy) {
+        window.clearTimeout(copyChangeTimer);
+
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          updateHeroCopy(slides[activeIndex]);
+        } else {
+          heroCopy.classList.add("is-changing");
+          copyChangeTimer = window.setTimeout(function () {
+            updateHeroCopy(slides[activeIndex]);
+            heroCopy.classList.remove("is-changing");
+          }, 220);
+        }
       }
     }
 
@@ -343,7 +360,7 @@
       window.clearInterval(timer);
       timer = window.setInterval(function () {
         showSlide((activeIndex + 1) % slideElements.length);
-      }, 3000);
+      }, 5500);
     }
 
     dots.forEach(function (dot) {

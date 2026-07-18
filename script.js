@@ -170,7 +170,7 @@
       hero: {
         selector: ".hero",
         titleSelector: "h1, .hero-subtitle",
-        bodySelector: ".hero-description, .hero-points li, .hero-footer-line"
+        bodySelector: ".hero-description"
       },
       quick: {
         selector: ".quick-actions",

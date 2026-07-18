@@ -40,10 +40,6 @@ body {
   visibility: hidden;
 }
 
-body.menu-open {
-  overflow: hidden;
-}
-
 a {
   color: inherit;
   text-decoration: none;
@@ -191,73 +187,13 @@ h3 {
   text-align: center;
 }
 
-.header-actions {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
 .reserve-pill,
 [data-cta*="reservation"] {
   display: none !important;
 }
 
-.header-text-link {
-  display: none;
-}
-
-.menu-toggle {
-  width: 44px;
-  height: 44px;
-  display: inline-grid;
-  place-content: center;
-  gap: 6px;
-  border: 0;
-  background: transparent;
-  color: var(--color-green);
-  cursor: pointer;
-}
-
-.menu-toggle span {
-  width: 24px;
-  height: 2px;
-  background: currentColor;
-  border-radius: 999px;
-}
-
-.primary-nav {
-  position: fixed;
-  inset: var(--header-height) 0 auto 0;
-  display: none;
-  background: rgba(255, 253, 248, 0.98);
-  border-bottom: 1px solid var(--color-line);
-  padding: 16px;
-  box-shadow: var(--shadow-card);
-}
-
-.primary-nav.is-open {
-  display: grid;
-  gap: 8px;
-}
-
-.primary-nav a {
-  border-radius: 8px;
-  color: var(--color-green);
-  font-weight: 850;
-  padding: 13px 14px;
-}
-
-.primary-nav a:hover {
-  background: rgba(223, 227, 212, 0.72);
-}
-
 .desktop-nav a[aria-current="page"] {
   border-color: rgba(184, 138, 85, 0.34);
-  background: rgba(234, 215, 188, 0.42);
-  color: var(--color-green);
-}
-
-.primary-nav a[aria-current="page"] {
   background: rgba(234, 215, 188, 0.42);
   color: var(--color-green);
 }
@@ -1445,10 +1381,6 @@ body[data-page="home"] .directions-section {
     --header-height: 126px;
   }
 
-  .header-text-link {
-    display: none;
-  }
-
   .hero {
     padding-top: calc(var(--header-height) + 34px);
   }
@@ -1602,21 +1534,6 @@ body[data-page="home"] .directions-section {
     color: var(--color-gold);
   }
 
-  .header-text-link {
-    display: none;
-    color: var(--color-green);
-    font-weight: 850;
-    white-space: nowrap;
-  }
-
-  .menu-toggle {
-    display: none;
-  }
-
-  .header-text-link:hover {
-    color: var(--color-gold);
-  }
-
   .hero-inner {
     min-height: 520px;
     display: block;
@@ -1757,7 +1674,6 @@ body[data-page="home"] .directions-section {
 @media (prefers-reduced-motion: no-preference) {
   html:not(.content-loading) .brand,
   html:not(.content-loading) .desktop-nav a,
-  html:not(.content-loading) .header-actions,
   html:not(.content-loading) .hero-copy > *,
   html:not(.content-loading) .quick-actions > a,
   html:not(.content-loading) .hero-footer-line,
@@ -1828,7 +1744,6 @@ body[data-page="home"] .directions-section {
     --motion-order: 4;
   }
 
-  html:not(.content-loading) .header-actions,
   html:not(.content-loading) .hero-points li:nth-child(3),
   html:not(.content-loading) .quick-actions > a:nth-child(2),
   html:not(.content-loading) .section li:nth-child(3),
@@ -1952,45 +1867,6 @@ h3 {
 
 .desktop-nav {
   display: none;
-}
-
-.menu-toggle {
-  width: 46px;
-  height: 46px;
-  border: 1px solid rgba(23, 61, 50, 0.13);
-  border-radius: 50%;
-}
-
-.menu-toggle span {
-  width: 21px;
-  height: 2px;
-  border-radius: 0;
-}
-
-.primary-nav {
-  inset: var(--header-height) 0 auto auto;
-  width: min(380px, 100%);
-  height: calc(100svh - var(--header-height));
-  max-height: calc(100svh - var(--header-height));
-  overflow-y: auto;
-  border-left: 1px solid var(--color-line);
-  background: rgba(255, 255, 255, 0.98);
-  padding: 18px;
-}
-
-.primary-nav.is-open {
-  display: grid;
-  gap: 2px;
-}
-
-.primary-nav a {
-  border-radius: 6px;
-  padding: 14px 16px;
-  font-weight: 750;
-}
-
-.primary-nav a + a {
-  border-top: 1px solid rgba(23, 61, 50, 0.08);
 }
 
 body[data-page]:not([data-page="home"]) main,
@@ -2794,11 +2670,6 @@ body[data-page]:not([data-page="home"]) .section-header {
     color: var(--color-green);
   }
 
-  .menu-toggle,
-  .primary-nav {
-    display: none !important;
-  }
-
   .brand-logo {
     width: 64px;
   }
@@ -2854,12 +2725,6 @@ body[data-page]:not([data-page="home"]) .section-header {
     color: var(--color-green);
   }
 
-  .primary-nav a[href="index.html"],
-  .primary-nav a[href="team.html"],
-  .primary-nav a[href="facilities.html"],
-  .primary-nav a[href="directions.html"] {
-    display: none;
-  }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -2922,16 +2787,6 @@ body[data-page]:not([data-page="home"]) .section-header {
     overflow: hidden;
     font-size: 1.08rem;
     text-overflow: ellipsis;
-  }
-
-  .menu-toggle {
-    width: 42px;
-    height: 42px;
-  }
-
-  .primary-nav {
-    width: 100%;
-    border-left: 0;
   }
 
   .home-hero {
@@ -3262,8 +3117,4 @@ body[data-page]:not([data-page="home"]) .section-header {
 @media (prefers-reduced-motion: no-preference) {
   html:not(.content-loading) .brand,
   html:not(.content-loading) .desktop-nav a,
-  html:not(.content-loading) .header-actions {
-    animation: none;
-    will-change: auto;
-  }
 }

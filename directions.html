@@ -133,13 +133,16 @@
                   네이버지도
                 </a>
               </div>
-              <div class="map-frame" aria-label="수원시 영통구 영통로 135 지도">
-                <iframe
-                  title="수원시 영통구 영통로 135 지도"
-                  src="https://www.google.com/maps?q=%EC%88%98%EC%9B%90%EC%8B%9C%20%EC%98%81%ED%86%B5%EA%B5%AC%20%EC%98%81%ED%86%B5%EB%A1%9C%20135&amp;output=embed"
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                ></iframe>
+              <div class="map-frame" aria-label="수원시 영통구 영통로 135 네이버 지도">
+                <div id="naver-map" class="naver-map" role="region" aria-label="스물하나 동물병원 위치 지도"></div>
+                <div class="map-load-status" aria-live="polite">
+                  <p>지도를 불러오는 중입니다.</p>
+                  <a
+                    href="https://map.naver.com/p/search/%EC%88%98%EC%9B%90%EC%8B%9C%20%EC%98%81%ED%86%B5%EA%B5%AC%20%EC%98%81%ED%86%B5%EB%A1%9C%20135"
+                    target="_blank"
+                    rel="noopener"
+                  >네이버 지도에서 위치 보기</a>
+                </div>
               </div>
             </div>
           </section>
@@ -188,6 +191,69 @@
     </script>
     <script>
       document.write('<script src="script.js?v=' + Date.now() + '"><\/script>');
+    </script>
+    <script>
+      (function () {
+        var mapFrame = document.querySelector(".map-frame");
+        var mapElement = document.getElementById("naver-map");
+        var statusText = document.querySelector(".map-load-status p");
+
+        if (!mapFrame || !mapElement) return;
+
+        window.initNaverMap = function () {
+          if (!window.naver || !window.naver.maps) {
+            statusText.textContent = "지도를 불러오지 못했습니다.";
+            mapFrame.classList.add("is-map-error");
+            return;
+          }
+
+          window.clearTimeout(mapLoadTimer);
+
+          var hospitalPosition = new window.naver.maps.LatLng(37.2396639, 127.0555798);
+          var map = new window.naver.maps.Map(mapElement, {
+            center: hospitalPosition,
+            zoom: 17,
+            minZoom: 8,
+            zoomControl: true,
+            zoomControlOptions: {
+              position: window.naver.maps.Position.TOP_RIGHT
+            }
+          });
+
+          var marker = new window.naver.maps.Marker({
+            position: hospitalPosition,
+            map: map,
+            title: "스물하나 동물병원"
+          });
+
+          var infoWindow = new window.naver.maps.InfoWindow({
+            content: '<div class="naver-map-label"><strong>스물하나 동물병원</strong><span>수원시 영통구 영통로 135</span></div>',
+            borderWidth: 0,
+            backgroundColor: "transparent",
+            disableAnchor: true,
+            pixelOffset: new window.naver.maps.Point(0, -12)
+          });
+
+          infoWindow.open(map, marker);
+          mapFrame.classList.add("is-map-ready");
+        };
+
+        var mapLoadTimer = window.setTimeout(function () {
+          if (mapFrame.classList.contains("is-map-ready")) return;
+          statusText.textContent = "지도를 불러오지 못했습니다.";
+          mapFrame.classList.add("is-map-error");
+        }, 10000);
+
+        var mapScript = document.createElement("script");
+        mapScript.src = "https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=16hvbtnamc&callback=initNaverMap";
+        mapScript.async = true;
+        mapScript.onerror = function () {
+          window.clearTimeout(mapLoadTimer);
+          statusText.textContent = "지도를 불러오지 못했습니다.";
+          mapFrame.classList.add("is-map-error");
+        };
+        document.head.appendChild(mapScript);
+      })();
     </script>
   </body>
 </html>

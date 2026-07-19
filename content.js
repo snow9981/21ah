@@ -12,7 +12,8 @@ window.SITE_CONTENT = {
     "care": "진료안내",
     "team": "의료진 소개",
     "philosophy": "진료철학",
-    "facilities": "병원시설 및 장비",
+    "facilities": "병원시설",
+    "equipment": "병원장비",
     "directions": "진료시간 및 오시는 길",
     "kakao": "카카오톡 상담",
     "blog": "블로그",
@@ -34,8 +35,8 @@ window.SITE_CONTENT = {
       "text": "위치와 운영시간 확인"
     },
     "checkup": {
-      "title": "병원시설 및 장비",
-      "text": "공간과 장비 소개"
+      "title": "병원시설",
+      "text": "병원 공간 둘러보기"
     },
     "kakao": {
       "title": "상담문의",

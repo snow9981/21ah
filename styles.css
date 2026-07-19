@@ -3010,7 +3010,162 @@ body[data-page="directions"] .site-footer {
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  html:not(.content-loading) .brand,
-  html:not(.content-loading) .desktop-nav a,
+.facility-gallery-page,
+.equipment-page {
+  padding: 92px 0 104px;
+}
+
+.facility-gallery-inner,
+.equipment-page-inner {
+  width: var(--container);
+  margin: 0 auto;
+}
+
+.facility-gallery-header,
+.equipment-page-header {
+  max-width: 720px;
+  margin-bottom: 54px;
+}
+
+.facility-gallery-header h1,
+.equipment-page-header h1 {
+  color: var(--color-green);
+  font-size: 2.55rem;
+  line-height: 1.22;
+}
+
+.facility-gallery-header p,
+.equipment-page-header p {
+  color: var(--color-muted);
+  font-size: 1.03rem;
+  line-height: 1.75;
+}
+
+.facility-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 34px 26px;
+}
+
+.facility-photo-item {
+  min-width: 0;
+  margin: 0;
+}
+
+.facility-photo-slot {
+  display: grid;
+  aspect-ratio: 4 / 3;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(23, 61, 50, 0.14);
+  border-radius: 6px;
+  background: #eef0eb;
+}
+
+.facility-photo-slot span {
+  color: rgba(23, 61, 50, 0.42);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.facility-photo-item figcaption {
+  padding: 12px 2px 0;
+  color: var(--color-charcoal);
+  font-size: 1rem;
+  font-weight: 750;
+}
+
+.equipment-category-list {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--color-line);
+}
+
+.equipment-category {
+  display: grid;
+  grid-template-columns: minmax(130px, 0.35fr) minmax(190px, 0.55fr) minmax(0, 1fr);
+  gap: 24px 36px;
+  align-items: baseline;
+  border-bottom: 1px solid var(--color-line);
+  padding: 34px 0;
+}
+
+.equipment-category > span {
+  color: var(--color-gold);
+  font-size: 0.8rem;
+  font-weight: 850;
+}
+
+.equipment-category h2 {
+  color: var(--color-green);
+  font-size: 1.45rem;
+}
+
+.equipment-category p {
+  color: var(--color-muted);
+  line-height: 1.75;
+}
+
+@media (min-width: 1024px) {
+  .desktop-nav {
+    gap: 20px;
+  }
+
+  .desktop-nav a {
+    font-size: 0.88rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --header-height: 134px;
+  }
+
+  .desktop-nav {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .desktop-nav a {
+    min-height: 44px;
+    padding: 4px 2px;
+    font-size: 0.64rem;
+    line-height: 1.14;
+  }
+}
+
+@media (max-width: 767px) {
+  .facility-gallery-page,
+  .equipment-page {
+    padding: 58px 0 72px;
+  }
+
+  .facility-gallery-header,
+  .equipment-page-header {
+    margin-bottom: 36px;
+  }
+
+  .facility-gallery-header h1,
+  .equipment-page-header h1 {
+    font-size: 2rem;
+  }
+
+  .facility-photo-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .facility-photo-item figcaption {
+    padding-top: 10px;
+    font-size: 0.95rem;
+  }
+
+  .equipment-category {
+    grid-template-columns: 1fr;
+    gap: 9px;
+    padding: 28px 0;
+  }
+
+  .equipment-category h2 {
+    font-size: 1.32rem;
+  }
 }

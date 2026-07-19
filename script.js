@@ -122,7 +122,8 @@
     const pageTitles = {
       home: "인사말 | 스물하나 동물병원",
       team: "의료진 소개 | 스물하나 동물병원",
-      facilities: "병원시설 및 장비 소개 | 스물하나 동물병원",
+      facilities: "병원시설 | 스물하나 동물병원",
+      equipment: "병원장비 | 스물하나 동물병원",
       directions: "진료시간 및 오시는 길 | 스물하나 동물병원",
       price: "주요 진료비용 안내 | 스물하나 동물병원"
     };
@@ -371,6 +372,87 @@
     startTimer();
   }
 
+  function initFacilityCarousel() {
+    const carousel = document.querySelector("[data-facility-carousel]");
+    if (!carousel || carousel.dataset.carouselReady === "true") return;
+
+    const slides = Array.from(carousel.querySelectorAll("[data-facility-slide]"));
+    const previousButton = carousel.querySelector("[data-facility-prev]");
+    const nextButton = carousel.querySelector("[data-facility-next]");
+    const currentNumber = carousel.querySelector("[data-facility-current]");
+    const dotList = carousel.querySelector("[data-facility-dots]");
+
+    if (!slides.length || !previousButton || !nextButton || !currentNumber || !dotList) return;
+
+    carousel.dataset.carouselReady = "true";
+    let activeIndex = 0;
+    let touchStartX = null;
+
+    const dots = slides.map(function (_, index) {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "facility-carousel-dot" + (index === 0 ? " is-active" : "");
+      dot.setAttribute("aria-label", String(index + 1) + "번째 시설 보기");
+      dot.setAttribute("aria-pressed", index === 0 ? "true" : "false");
+      dot.addEventListener("click", function () {
+        showSlide(index);
+      });
+      dotList.appendChild(dot);
+      return dot;
+    });
+
+    function showSlide(index) {
+      const nextIndex = (index + slides.length) % slides.length;
+      if (nextIndex === activeIndex) return;
+
+      slides[activeIndex].classList.remove("is-active");
+      slides[activeIndex].setAttribute("aria-hidden", "true");
+      dots[activeIndex].classList.remove("is-active");
+      dots[activeIndex].setAttribute("aria-pressed", "false");
+
+      activeIndex = nextIndex;
+      slides[activeIndex].classList.add("is-active");
+      slides[activeIndex].setAttribute("aria-hidden", "false");
+      dots[activeIndex].classList.add("is-active");
+      dots[activeIndex].setAttribute("aria-pressed", "true");
+      currentNumber.textContent = String(activeIndex + 1).padStart(2, "0");
+    }
+
+    previousButton.addEventListener("click", function () {
+      showSlide(activeIndex - 1);
+    });
+
+    nextButton.addEventListener("click", function () {
+      showSlide(activeIndex + 1);
+    });
+
+    carousel.addEventListener("keydown", function (event) {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        showSlide(activeIndex - 1);
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        showSlide(activeIndex + 1);
+      }
+    });
+
+    carousel.addEventListener("touchstart", function (event) {
+      touchStartX = event.changedTouches[0].clientX;
+    }, { passive: true });
+
+    carousel.addEventListener("touchend", function (event) {
+      if (touchStartX === null) return;
+
+      const distance = event.changedTouches[0].clientX - touchStartX;
+      touchStartX = null;
+      if (Math.abs(distance) < 50) return;
+
+      showSlide(activeIndex + (distance < 0 ? 1 : -1));
+    }, { passive: true });
+  }
+
   ctaLinks.forEach(function (link) {
     link.addEventListener("click", function () {
       console.log("CTA clicked:", link.dataset.cta, link.getAttribute("href"));
@@ -380,5 +462,6 @@
   window.addEventListener("scroll", setHeaderState, { passive: true });
   applyEditableContentWhenReady(0);
   initExteriorSlideshow();
+  initFacilityCarousel();
   setHeaderState();
 })();

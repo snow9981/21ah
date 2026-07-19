@@ -3027,6 +3027,11 @@ body[data-page="directions"] .site-footer {
   margin-bottom: 54px;
 }
 
+.facility-gallery-header {
+  max-width: 940px;
+  margin-bottom: 62px;
+}
+
 .facility-gallery-header h1,
 .equipment-page-header h1 {
   color: var(--color-green);
@@ -3034,22 +3039,17 @@ body[data-page="directions"] .site-footer {
   line-height: 1.22;
 }
 
+.facility-gallery-header h1 {
+  max-width: 900px;
+  font-size: 3.25rem;
+  line-height: 1.18;
+}
+
 .facility-gallery-header p,
 .equipment-page-header p {
   color: var(--color-muted);
   font-size: 1.03rem;
   line-height: 1.75;
-}
-
-.facility-photo-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 34px 26px;
-}
-
-.facility-photo-item {
-  min-width: 0;
-  margin: 0;
 }
 
 .facility-photo-slot {
@@ -3068,11 +3068,178 @@ body[data-page="directions"] .site-footer {
   font-weight: 800;
 }
 
-.facility-photo-item figcaption {
-  padding: 12px 2px 0;
-  color: var(--color-charcoal);
+.facility-showcase {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(23, 61, 50, 0.14);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 18px 48px rgba(23, 61, 50, 0.07);
+  outline: none;
+}
+
+.facility-showcase:focus-visible {
+  box-shadow: 0 0 0 3px rgba(174, 119, 58, 0.28), 0 18px 48px rgba(23, 61, 50, 0.07);
+}
+
+.facility-slide-track,
+.facility-slide {
+  min-height: 610px;
+}
+
+.facility-slide {
+  display: none;
+  grid-template-columns: minmax(0, 1.85fr) minmax(330px, 0.75fr);
+}
+
+.facility-slide.is-active {
+  display: grid;
+  animation: facility-slide-in 360ms ease both;
+}
+
+.facility-slide-media {
+  min-width: 0;
+  margin: 0;
+  background: #eef0eb;
+}
+
+.facility-slide-media .facility-photo-slot {
+  width: 100%;
+  height: 100%;
+  min-height: 610px;
+  aspect-ratio: auto;
+  border: 0;
+  border-radius: 0;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.48), transparent 52%),
+    #e7ebe4;
+}
+
+.facility-slide-media figcaption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.facility-slide-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px 44px 124px;
+}
+
+.facility-slide-copy .section-kicker {
+  margin-bottom: 18px;
+}
+
+.facility-slide-copy h2 {
+  color: var(--color-green);
+  font-size: 2rem;
+  line-height: 1.38;
+}
+
+.facility-slide-copy p {
+  margin-top: 20px;
+  color: var(--color-muted);
   font-size: 1rem;
+  line-height: 1.82;
+}
+
+.facility-slide-copy strong {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-line);
+  color: var(--color-green);
+  font-size: 0.96rem;
   font-weight: 750;
+  line-height: 1.75;
+}
+
+.facility-carousel-controls {
+  position: absolute;
+  right: 36px;
+  bottom: 28px;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.facility-carousel-progress {
+  display: flex;
+  gap: 5px;
+  align-items: baseline;
+  color: var(--color-muted);
+  font-size: 0.78rem;
+}
+
+.facility-carousel-progress strong {
+  color: var(--color-green);
+  font-size: 1.08rem;
+}
+
+.facility-carousel-dots {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.facility-carousel-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(23, 61, 50, 0.22);
+  cursor: pointer;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.facility-carousel-dot:hover,
+.facility-carousel-dot:focus-visible,
+.facility-carousel-dot.is-active {
+  background: var(--color-gold);
+  transform: scale(1.35);
+}
+
+.facility-carousel-arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.facility-carousel-arrows button {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(23, 61, 50, 0.2);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--color-green);
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+.facility-carousel-arrows button:hover,
+.facility-carousel-arrows button:focus-visible {
+  border-color: var(--color-green);
+  background: var(--color-green);
+  color: #fff;
+}
+
+@keyframes facility-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .equipment-category-list {
@@ -3149,14 +3316,67 @@ body[data-page="directions"] .site-footer {
     font-size: 2rem;
   }
 
-  .facility-photo-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
+  .facility-gallery-header {
+    margin-bottom: 34px;
   }
 
-  .facility-photo-item figcaption {
-    padding-top: 10px;
-    font-size: 0.95rem;
+  .facility-slide-track,
+  .facility-slide {
+    min-height: 0;
+  }
+
+  .facility-slide {
+    grid-template-columns: 1fr;
+  }
+
+  .facility-slide-media .facility-photo-slot {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .facility-slide-copy {
+    min-height: 360px;
+    justify-content: flex-start;
+    padding: 30px 22px 28px;
+  }
+
+  .facility-slide-copy .section-kicker {
+    margin-bottom: 13px;
+  }
+
+  .facility-slide-copy h2 {
+    font-size: 1.55rem;
+  }
+
+  .facility-slide-copy p {
+    margin-top: 15px;
+    font-size: 0.94rem;
+  }
+
+  .facility-slide-copy strong {
+    margin-top: 20px;
+    padding-top: 17px;
+    font-size: 0.9rem;
+  }
+
+  .facility-carousel-controls {
+    position: static;
+    justify-content: space-between;
+    padding: 16px 18px 20px;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .facility-carousel-dots {
+    gap: 6px;
+  }
+
+  .facility-carousel-arrows button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .facility-carousel-progress span {
+    display: none;
   }
 
   .equipment-category {
@@ -3167,5 +3387,16 @@ body[data-page="directions"] .site-footer {
 
   .equipment-category h2 {
     font-size: 1.32rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .facility-slide.is-active {
+    animation: none;
+  }
+
+  .facility-carousel-dot,
+  .facility-carousel-arrows button {
+    transition: none;
   }
 }

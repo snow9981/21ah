@@ -3,7 +3,7 @@
   const ctaLinks = document.querySelectorAll("[data-cta]");
 
   document.querySelectorAll(".mobile-sticky-cta [data-cta*='reservation']").forEach(function (element) {
-    element.href = "{{NAVER_PLACE_URL}}";
+    element.href = "https://naver.me/GB3ed1yk";
     element.dataset.cta = "sticky-place";
     element.setAttribute("aria-label", "네이버 플레이스로 이동");
     element.textContent = "네이버 플레이스";

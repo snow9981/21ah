@@ -453,6 +453,67 @@
     }, { passive: true });
   }
 
+  function initMobileStickyCta() {
+    const stickyCtas = Array.from(document.querySelectorAll(".mobile-sticky-cta"));
+    if (!stickyCtas.length) return;
+
+    let hideTimer = null;
+    let isInteracting = false;
+
+    function showStickyCtas() {
+      if (hideTimer) window.clearTimeout(hideTimer);
+      stickyCtas.forEach(function (cta) {
+        cta.classList.add("is-visible");
+      });
+    }
+
+    function hideStickyCtas() {
+      if (isInteracting) return;
+      stickyCtas.forEach(function (cta) {
+        cta.classList.remove("is-visible");
+      });
+    }
+
+    function scheduleHide() {
+      if (hideTimer) window.clearTimeout(hideTimer);
+      hideTimer = window.setTimeout(hideStickyCtas, 1300);
+    }
+
+    stickyCtas.forEach(function (cta) {
+      cta.classList.add("is-scroll-aware");
+
+      cta.addEventListener("pointerdown", function () {
+        isInteracting = true;
+        showStickyCtas();
+      });
+
+      cta.addEventListener("pointerup", function () {
+        isInteracting = false;
+        scheduleHide();
+      });
+
+      cta.addEventListener("pointercancel", function () {
+        isInteracting = false;
+        scheduleHide();
+      });
+
+      cta.addEventListener("focusin", function () {
+        isInteracting = true;
+        showStickyCtas();
+      });
+
+      cta.addEventListener("focusout", function () {
+        isInteracting = false;
+        scheduleHide();
+      });
+    });
+
+    window.addEventListener("scroll", function () {
+      showStickyCtas();
+      scheduleHide();
+    }, { passive: true });
+  }
+
   ctaLinks.forEach(function (link) {
     link.addEventListener("click", function () {
       console.log("CTA clicked:", link.dataset.cta, link.getAttribute("href"));
@@ -463,5 +524,6 @@
   applyEditableContentWhenReady(0);
   initExteriorSlideshow();
   initFacilityCarousel();
+  initMobileStickyCta();
   setHeaderState();
 })();

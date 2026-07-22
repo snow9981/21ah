@@ -1194,6 +1194,25 @@ body[data-page="home"] .directions-section {
   color: var(--color-green);
 }
 
+.mobile-sticky-cta.is-scroll-aware {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(calc(100% + 24px));
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease,
+    visibility 0s linear 220ms;
+}
+
+.mobile-sticky-cta.is-scroll-aware.is-visible {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
 @media (min-width: 768px) {
   :root {
     --container: min(1180px, calc(100% - 56px));
@@ -1296,6 +1315,12 @@ body[data-page="home"] .directions-section {
 
   .site-footer {
     padding-bottom: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-sticky-cta.is-scroll-aware {
+    transition-duration: 0s;
   }
 }
 

@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>스물하나 동물병원 강아지 건강검진 이벤트</title>
+  <style>
+    :root {
+      --paper: #fbf7ef;
+      --cream: #fffdf8;
+      --green: #203b33;
+      --green-mid: #56675d;
+      --sage: #dfe3d4;
+      --sage-soft: #eef0e8;
+      --gold: #b88a55;
+      --gold-soft: #f1e3d1;
+      --ink: #202724;
+      --muted: #66706a;
+      --line: rgba(32, 59, 51, .18);
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body,
+    .poster,
+    .poster * {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: #d9ddd7;
+      color: var(--ink);
+      font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      word-break: keep-all;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      padding: 28px;
+    }
+
+    .poster-stage {
+      width: 1080px;
+      height: 1350px;
+      flex: 0 0 auto;
+    }
+
+    .poster {
+      position: relative;
+      width: 1080px;
+      height: 1350px;
+      overflow: hidden;
+      padding: 42px 48px 36px;
+      background:
+        radial-gradient(circle at 94% 4%, rgba(184, 138, 85, .13), transparent 24%),
+        radial-gradient(circle at 4% 34%, rgba(174, 184, 164, .20), transparent 25%),
+        var(--paper);
+      transform-origin: top left;
+    }
+
+    .poster::before,
+    .poster::after {
+      position: absolute;
+      z-index: 0;
+      border: 1px solid rgba(32, 59, 51, .12);
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+    }
+
+    .poster::before {
+      top: -225px;
+      right: -210px;
+      width: 540px;
+      height: 540px;
+    }
+
+    .poster::after {
+      bottom: -300px;
+      left: -250px;
+      width: 600px;
+      height: 600px;
+    }
+
+    .poster > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 96px;
+      padding: 2px 4px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+    }
+
+    .brand-name strong {
+      position: relative;
+      display: block;
+      color: var(--green);
+      font-size: 40px;
+      font-weight: 900;
+      letter-spacing: -1.8px;
+      line-height: 1.1;
+    }
+
+    .brand-name strong::after {
+      display: block;
+      width: 56px;
+      height: 5px;
+      margin-top: 7px;
+      border-radius: 999px;
+      background: var(--gold);
+      content: "";
+    }
+
+    .brand-name span {
+      display: block;
+      margin-top: 8px;
+      color: var(--green-mid);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3.3px;
+    }
+
+    .period {
+      padding: 10px 17px 11px;
+      border: 1px solid rgba(32, 59, 51, .28);
+      border-radius: 999px;
+      background: rgba(255, 253, 248, .72);
+      color: var(--green);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -.3px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      align-items: center;
+      gap: 28px;
+      min-height: 252px;
+      padding: 31px 12px 28px 8px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 9px;
+      color: var(--green);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -.4px;
+    }
+
+    .eyebrow::before {
+      display: block;
+      width: 38px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--gold);
+      content: "";
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--green);
+      font-size: 60px;
+      font-weight: 800;
+      letter-spacing: -3px;
+      line-height: 1.12;
+    }
+
+    .hero-copy {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -.55px;
+    }
+
+    .discount {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 250px;
+      height: 180px;
+      justify-self: end;
+      border-radius: 90px 16px 90px 16px;
+      background: var(--green);
+      color: var(--cream);
+      box-shadow: 14px 14px 0 var(--gold-soft);
+      text-align: center;
+      transform: rotate(-2deg);
+    }
+
+    .discount small {
+      display: block;
+      margin-bottom: 2px;
+      color: #e8ebdf;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .discount strong {
+      display: block;
+      font-size: 68px;
+      font-weight: 900;
+      letter-spacing: -3px;
+      line-height: .95;
+    }
+
+    .discount span {
+      display: block;
+      margin-top: 6px;
+      color: #f0dfc7;
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .comparison {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 248, .9);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    col.item-col { width: 25%; }
+    col.plan-col { width: 18.75%; }
+
+    th,
+    td {
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    tr > *:last-child { border-right: 0; }
+    tbody tr:last-child > * { border-bottom: 0; }
+
+    .plan-row th {
+      height: 62px;
+      background: var(--green);
+      color: var(--cream);
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: .35px;
+    }
+
+    .plan-row th:first-child {
+      background: var(--sage-soft);
+      color: var(--green);
+      font-size: 20px;
+      letter-spacing: -.3px;
+    }
+
+    .plan-row th:nth-child(3) { background: #30493f; }
+    .plan-row th:nth-child(4) { background: #3f554b; }
+    .plan-row th:nth-child(5) { background: #4d6057; }
+
+    .price-row th {
+      height: 118px;
+      padding: 9px 5px 10px;
+      background: var(--cream);
+    }
+
+    .price-row th:first-child {
+      background: #f4f2e9;
+      color: var(--green-mid);
+      font-size: 18px;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+    .normal-price {
+      display: block;
+      margin-bottom: 7px;
+      color: #58615c;
+      font-size: 21px;
+      font-weight: 700;
+      text-decoration: line-through;
+      text-decoration-thickness: 1.5px;
+    }
+
+    .sale-price {
+      display: block;
+      color: var(--green);
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -1.4px;
+      line-height: 1.05;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sale-price small {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -.3px;
+    }
+
+    tbody th,
+    tbody td {
+      height: 51px;
+      padding: 5px 8px;
+      font-size: 21px;
+    }
+
+    tbody th {
+      background: rgba(238, 240, 232, .78);
+      color: var(--green);
+      font-weight: 750;
+      letter-spacing: -.45px;
+      text-align: left;
+      padding-left: 22px;
+    }
+
+    tbody tr:nth-child(even) td { background: rgba(251, 247, 239, .62); }
+
+    .check {
+      display: inline-grid;
+      place-items: center;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .dash {
+      color: #9aa19d;
+      font-size: 24px;
+    }
+
+    .count {
+      color: var(--green);
+      font-weight: 850;
+    }
+
+    .footer {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: center;
+      min-height: 110px;
+      padding: 22px 6px 0;
+    }
+
+    .footer p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.55;
+    }
+
+    .footer strong {
+      display: block;
+      color: var(--green);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .export-tools {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .export-button {
+      border: 0;
+      border-radius: 10px;
+      background: var(--green);
+      color: #fff;
+      padding: 12px 17px;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 800;
+      box-shadow: 0 8px 24px rgba(32, 59, 51, .22);
+      cursor: pointer;
+    }
+
+    .export-button:hover { background: #2c493f; }
+    .export-button:disabled { cursor: wait; opacity: .65; }
+
+    .export-status {
+      color: #33413b;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    @media print {
+      @page { size: 1080px 1350px; margin: 0; }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1350px;
+        background: #fff;
+      }
+      body { display: block; padding: 0; }
+      .poster { transform: none !important; }
+      .export-tools { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="poster-stage" id="posterStage">
+    <main class="poster" id="poster" aria-label="스물하나 동물병원 오픈기념 강아지 건강검진 이벤트 포스터">
+      <header class="brand-row">
+        <div class="brand">
+          <div class="brand-name">
+            <strong>스물하나 동물병원</strong>
+            <span>SMULHANA ANIMAL HOSPITAL</span>
+          </div>
+        </div>
+        <div class="period">10월 17일까지 · 2개월 한정</div>
+      </header>
+
+      <section class="hero">
+        <div>
+          <p class="eyebrow">스물하나 동물병원 개원기념</p>
+          <h1>건강검진<br>오픈기념 이벤트</h1>
+          <p class="hero-copy">연령과 건강상태에 맞춘 단계별 검진 프로그램</p>
+        </div>
+        <div class="discount" aria-label="전 프로그램 20퍼센트 할인">
+          <div>
+            <small>전 프로그램</small>
+            <strong>20%</strong>
+            <span>할인</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="comparison" aria-label="건강검진 프로그램 가격과 검사 항목 비교">
+        <table>
+          <colgroup>
+            <col class="item-col">
+            <col class="plan-col">
+            <col class="plan-col">
+            <col class="plan-col">
+            <col class="plan-col">
+          </colgroup>
+          <thead>
+            <tr class="plan-row">
+              <th scope="col">검사항목</th>
+              <th scope="col">BASIC</th>
+              <th scope="col">STANDARD</th>
+              <th scope="col">GOLD</th>
+              <th scope="col">PREMIUM</th>
+            </tr>
+            <tr class="price-row">
+              <th scope="row">정상가 →<br>20% 할인가</th>
+              <th><span class="normal-price">183,000원</span><span class="sale-price">140,000<small>원</small></span></th>
+              <th><span class="normal-price">330,000원</span><span class="sale-price">260,000<small>원</small></span></th>
+              <th><span class="normal-price">455,000원</span><span class="sale-price">360,000<small>원</small></span></th>
+              <th><span class="normal-price">605,000원</span><span class="sale-price">480,000<small>원</small></span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">신체검사</th><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+            <tr><th scope="row">CBC</th><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+            <tr><th scope="row">흉복부 X-RAY</th><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+            <tr><th scope="row">혈청화학검사</th><td><span class="count">10종</span></td><td><span class="count">15종</span></td><td><span class="count">20종</span></td><td><span class="count">20종</span></td></tr>
+            <tr><th scope="row">복부초음파</th><td><span class="dash">–</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+            <tr><th scope="row">전해질검사</th><td><span class="dash">–</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+            <tr><th scope="row">소변검사</th><td><span class="dash">–</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+            <tr><th scope="row">혈압</th><td><span class="dash">–</span></td><td><span class="dash">–</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+            <tr><th scope="row">SDMA</th><td><span class="dash">–</span></td><td><span class="dash">–</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+            <tr><th scope="row">NT-proBNP</th><td><span class="dash">–</span></td><td><span class="dash">–</span></td><td><span class="dash">–</span></td><td><span class="check">✓</span></td></tr>
+            <tr><th scope="row">T4</th><td><span class="dash">–</span></td><td><span class="dash">–</span></td><td><span class="dash">–</span></td><td><span class="check">✓</span></td></tr>
+            <tr><th scope="row">cPL / fPL</th><td><span class="dash">–</span></td><td><span class="dash">–</span></td><td><span class="dash">–</span></td><td><span class="check">✓</span></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <footer class="footer">
+        <p>
+          <strong>아이의 현재 건강상태에 맞는 검진을 안내해 드립니다.</strong>
+          검사 항목은 연령·품종·증상 및 건강상태에 따라 일부 조정될 수 있습니다.
+        </p>
+      </footer>
+    </main>
+  </div>
+
+  <div class="export-tools">
+    <span class="export-status" id="exportStatus" aria-live="polite"></span>
+    <button class="export-button" id="savePng" type="button">PNG로 저장</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    (() => {
+      const stage = document.getElementById("posterStage");
+      const poster = document.getElementById("poster");
+      const saveButton = document.getElementById("savePng");
+      const exportStatus = document.getElementById("exportStatus");
+      const posterWidth = 1080;
+      const posterHeight = 1350;
+      const pagePadding = 56;
+
+      function fitPoster() {
+        const availableWidth = Math.max(320, window.innerWidth - pagePadding);
+        const availableHeight = Math.max(320, window.innerHeight - pagePadding);
+        const scale = Math.min(1, availableWidth / posterWidth, availableHeight / posterHeight);
+        stage.style.width = `${posterWidth * scale}px`;
+        stage.style.height = `${posterHeight * scale}px`;
+        poster.style.transform = `scale(${scale})`;
+      }
+
+      window.addEventListener("resize", fitPoster);
+      fitPoster();
+
+      saveButton.addEventListener("click", async () => {
+        if (typeof window.html2canvas !== "function") {
+          exportStatus.textContent = "저장 기능을 불러오지 못했습니다. 인터넷 연결 후 새로고침해 주세요.";
+          return;
+        }
+
+        saveButton.disabled = true;
+        exportStatus.textContent = "이미지 만드는 중…";
+        const previousTransform = poster.style.transform;
+
+        try {
+          await document.fonts.ready;
+          poster.style.transform = "none";
+
+          const canvas = await window.html2canvas(poster, {
+            width: posterWidth,
+            height: posterHeight,
+            scale: 1,
+            backgroundColor: "#fbf7ef",
+            useCORS: true,
+            logging: false,
+            imageTimeout: 0
+          });
+
+          const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+          if (!blob) throw new Error("PNG 생성 실패");
+
+          const link = document.createElement("a");
+          const objectUrl = URL.createObjectURL(blob);
+          link.href = objectUrl;
+          link.download = "스물하나동물병원_강아지건강검진_이벤트.png";
+          link.click();
+          URL.revokeObjectURL(objectUrl);
+          exportStatus.textContent = "1080 × 1350 PNG 저장 완료";
+        } catch (error) {
+          exportStatus.textContent = "저장에 실패했습니다. 다시 시도해 주세요.";
+        } finally {
+          poster.style.transform = previousTransform;
+          saveButton.disabled = false;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

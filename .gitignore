@@ -1,0 +1,5 @@
+# Local originals and review material must never be published.
+/mobile-renewal/incoming/
+/mobile-renewal/reference/
+/mobile-renewal/qa/
+.DS_Store

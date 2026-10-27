@@ -9,6 +9,7 @@
 - `mobile-renewal/site/styles.css`, `mobile-renewal/site/script.js`: 디자인과 동작 원본.
 - `mobile-renewal/price-content.json`: 진료비 항목, 금액 및 적용 기준.
 - `mobile-renewal/publication.json`: 정식 주소와 후기 게시 설정.
+- 같은 설정의 `googleSiteVerification`: Google Search Console 인증값. 인증을 유지하려면 삭제하지 않습니다.
 - `mobile-renewal/site/`: 검색 제외 미리보기. 원본 디자인 확인용이며 정식 대표 주소가 아닙니다.
 
 ## 수정 및 배포

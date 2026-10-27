@@ -21,7 +21,11 @@ function build(env) {
 
 // Publish only generated site files; source photos and local backups stay local.
 try {
-  build({ SITE_URL: siteUrl.href, INCLUDE_REVIEWS: String(settings.includeReviews) });
+  build({
+    SITE_URL: siteUrl.href,
+    INCLUDE_REVIEWS: String(settings.includeReviews),
+    GOOGLE_SITE_VERIFICATION: settings.googleSiteVerification || ""
+  });
   for (const file of ["index.html", "checkup.html", "heart.html", "dental.html", "cat.html", "price.html", "styles.css", "script.js", "sitemap.xml"]) {
     fs.copyFileSync(path.join(preview, file), path.join(root, file));
   }
@@ -47,5 +51,5 @@ try {
   console.log(`Prepared public website: ${siteUrl.href}`);
 } finally {
   // Keep the separately accessible design preview out of search results.
-  build({ SITE_URL: "", INCLUDE_REVIEWS: "true" });
+  build({ SITE_URL: "", INCLUDE_REVIEWS: "true", GOOGLE_SITE_VERIFICATION: "" });
 }

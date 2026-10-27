@@ -73,6 +73,22 @@ let home = `
 <section class="faq-band"><div class="wrap section"><p class="eyebrow">BEFORE YOUR VISIT</p><h2>방문 전, 궁금한 점.</h2>${faq([['처음 방문할 때 무엇을 가져가면 좋을까요?','이전 검사 결과와 처방 내역이 있다면 가져와 주세요. 평소와 달라진 모습을 촬영한 영상도 진료에 도움이 됩니다.'],['검진이나 스케일링 전에 금식해야 하나요?','예정된 검사와 아이의 상태에 따라 준비사항이 다릅니다. 방문 전 전화 또는 카카오톡으로 확인해 주세요.'],['고양이 전용 진료실이 있나요?','네, 고양이 전용 진료실과 분리된 고양이 입원장이 있습니다.'],['일요일과 명절에도 진료하나요?','일요일과 설·추석 당일은 휴진입니다. 그 외 공휴일 운영은 방문 전 병원에 확인해 주세요.']])}</div></section>
 <section id="visit" class="wrap section visit"><div><p class="eyebrow">HOURS & LOCATION</p><h2>기다리고 있겠습니다.</h2><p class="address">경기도 수원시 영통구 영통로 135</p><a class="phone-number" href="${links.phone}">031-8009-0811 ${icon('ArrowUpRight')}</a><dl class="hours"><div><dt>평일</dt><dd>09:30 – 19:30</dd></div><div><dt>토요일</dt><dd>09:30 – 17:30</dd></div><div><dt>점심시간</dt><dd>13:00 – 14:00</dd></div><div class="closed"><dt>휴진</dt><dd>일요일 · 설, 추석 당일</dd></div></dl><div class="visit-actions"><a class="button primary" href="${links.place}" target="_blank" rel="noopener">${icon('MapPin')}네이버 길찾기</a><a class="button" href="${links.kakao}" target="_blank" rel="noopener">${icon('MessageCircle')}카카오톡 문의</a></div></div><div class="visit-photo"><img src="assets/exterior-720.webp" width="720" height="540" alt="영통로에 위치한 스물하나 동물병원 외관" loading="lazy"><a href="${links.place}" target="_blank" rel="noopener">네이버 플레이스에서 위치 확인 ${arrow()}</a></div></section>`;
 home = home.replace('<section id="cat-space" class="cat-space">', `${reviewBand('checkup')}<section id="cat-space" class="cat-space">`).replace('<section class="dental-band">', `${reviewBand('cat')}<section class="dental-band">`).replace('<section id="story"', `${reviewBand('dental')}<section id="story"`);
+async function writePage(file, html) {
+  html = html.replace('class="header-phone"', 'class="header-phone" aria-label="전화 문의 031-8009-0811" title="전화 문의"');
+  if (base && file === 'index.html' && process.env.GOOGLE_SITE_VERIFICATION) {
+    html = html.replace('</head>', `<meta name="google-site-verification" content="${esc(process.env.GOOGLE_SITE_VERIFICATION)}"></head>`);
+  }
+  // Sync clients can briefly lock a page while the public and preview builds run.
+  for (let attempt = 0; ; attempt++) {
+    try {
+      await fs.promises.writeFile(path.join(out, file), html);
+      return;
+    } catch (error) {
+      if (attempt >= 4 || !['EBUSY', 'EACCES', 'EPERM', 'UNKNOWN'].includes(error.code)) throw error;
+      await new Promise(resolve => setTimeout(resolve, 250 * (2 ** attempt)));
+    }
+  }
+}
 async function build() {
   fs.mkdirSync(path.join(out,'assets'),{recursive:true});
   const images=[['director-profile1.png','director1.webp',600],['director-profile2.png','director2.webp',600],['logo-mark.png','logo.webp',140]];
@@ -87,22 +103,18 @@ async function build() {
   const metadata = await sharp(echo).metadata();
   const headerHeight = Math.ceil(metadata.height * 0.085);
   await sharp(echo).extract({left:0,top:headerHeight,width:metadata.width,height:metadata.height-headerHeight}).resize({width:1000}).webp({quality:88}).toFile(path.join(out,'assets/heart-ultrasound.webp'));
-  fs.writeFileSync(path.join(out,'index.html'),page('index.html','수원 영통·망포 건강검진, 심장초음파','건강검진, 심장 진료와 심장초음파, 스케일링, 고양이 친화 진료. 수원 영통 스물하나 동물병원의 의료진과 방문 안내를 확인하세요.',home));
+  await writePage('index.html',page('index.html','수원 영통·망포 건강검진, 심장초음파','건강검진, 심장 진료와 심장초음파, 스케일링, 고양이 친화 진료. 수원 영통 스물하나 동물병원의 의료진과 방문 안내를 확인하세요.',home));
   for(const s of services) {
 const body=`<div class="wrap detail"><a class="back-link" href="index.html#care">${icon('ArrowLeft')}진료 안내</a><div class="detail-heading ${s.tone}"><span class="detail-icon">${icon(s.icon)}</span><p class="eyebrow">${s.n} / ${s.name}</p><h1>${s.title}</h1><p class="lead">${s.lead}</p></div><div class="detail-layout"><div><section class="detail-points" aria-label="진료 과정">${s.points.map(([h,p])=>`<article><h2>${h}</h2><p>${p}</p></article>`).join('')}</section><section class="detail-faq"><h2>자주 묻는 질문</h2>${faq(s.faq)}</section>${s.article && s.id!=='dental'?`<a class="article-link" href="${links.blog}/${s.article}" target="_blank" rel="noopener"><span>병원 블로그에서<br><strong>관련 진료 이야기 읽기</strong></span>${arrow()}</a>`:''}</div><aside class="detail-contact"><h2>우리 아이의 진료,<br>먼저 문의해 주세요.</h2><p>현재 상태와 방문 목적을 알려주시면 안내해 드리겠습니다.</p><a class="button primary" href="${links.phone}">${icon('Phone')}031-8009-0811</a><a class="button" href="${links.kakao}" target="_blank" rel="noopener">${icon('MessageCircle')}카카오톡 문의</a><a class="text-link" href="index.html#visit">진료시간 · 오시는 길 ${arrow()}</a></aside></div><nav class="other-care" aria-label="다른 진료 안내">${services.filter(t=>t.id!==s.id).map(t=>`<a href="${t.id}.html">${t.name}${arrow()}</a>`).join('')}</nav></div>`;
     const dentalPreview = s.id === 'dental' ? `<a class="dental-preview" href="${links.blog}/${s.article}" target="_blank" rel="noopener"><span class="dental-preview-source">병원 블로그에서</span><strong>스케일링 실제 과정<br><span>미리보기 ${arrow()}</span></strong></a>` : '';
     const review = reviewDates[s.id] ? reviewFigure(s.id) : '';
     const illustratedBody = body.replace('<section class="detail-points"', `${photoGallery(s.id)}<section class="detail-points"`).replace('<section class="detail-faq"', `${review}${dentalPreview}<section class="detail-faq"`);
-    fs.writeFileSync(path.join(out,`${s.id}.html`),page(`${s.id}.html`,s.name,s.lead,illustratedBody));
+    await writePage(`${s.id}.html`,page(`${s.id}.html`,s.name,s.lead,illustratedBody));
   }
-  fs.writeFileSync(path.join(out,'price.html'),page('price.html','주요 진료비용 안내','스물하나 동물병원의 주요 진료 항목과 비용 안내.',pricePage()));
+  await writePage('price.html',page('price.html','주요 진료비용 안내','스물하나 동물병원의 주요 진료 항목과 비용 안내.',pricePage()));
   fs.copyFileSync(path.join(dependencies,'lucide/LICENSE'),path.join(out,'assets/LUCIDE-LICENSE'));
 if(base) fs.writeFileSync(path.join(out,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['index.html',...services.map(s=>s.id+'.html'),'price.html'].map(f=>`<url><loc>${new URL(f === 'index.html' ? './' : f,base).href}</loc></url>`).join('')}</urlset>`);
   else if (fs.existsSync(path.join(out, 'sitemap.xml'))) fs.unlinkSync(path.join(out, 'sitemap.xml'));
-  for (const file of fs.readdirSync(out).filter(f => f.endsWith('.html'))) {
-    const target = path.join(out,file);
-    fs.writeFileSync(target, fs.readFileSync(target,'utf8').replace('class="header-phone"', 'class="header-phone" aria-label="전화 문의 031-8009-0811" title="전화 문의"'));
-  }
   console.log('Built 6 static pages. '+(base?'Production URLs: '+base:'Preview only: noindex; set SITE_URL before production.'));
 }
 build().catch(e=>{console.error(e);process.exitCode=1;});

@@ -1,4 +1,17 @@
 (() => {
+  const comparison = document.querySelector('.program-comparison');
+  if (comparison) {
+    const desktop = matchMedia('(min-width: 900px)');
+    const syncComparison = () => { comparison.open = desktop.matches; };
+    syncComparison();
+    desktop.addEventListener('change', syncComparison);
+    document.querySelectorAll('[data-plan]').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('[data-plan]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+        document.querySelectorAll('[data-plan-panel]').forEach(panel => { panel.hidden = panel.dataset.planPanel !== button.dataset.plan; });
+      });
+    });
+  }
   const toggle = document.querySelector('.menu-toggle');
   const menu = document.querySelector('#mobile-menu');
   toggle.hidden = false;

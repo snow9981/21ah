@@ -36,3 +36,14 @@ footer{background:#183b32;color:#fff;padding:38px 0 108px}.footer-inner{display:
 .program-comparison{margin-top:20px;border-top:1px solid #cbd8d1;border-bottom:1px solid #cbd8d1}.program-comparison summary{display:flex;align-items:center;justify-content:space-between;padding:17px 0;font-weight:700;cursor:pointer;list-style:none}.program-comparison summary::-webkit-details-marker{display:none}
 .program-table-scroll{max-width:100%;overflow-x:auto;padding-bottom:8px}.program-table-scroll table{width:100%;min-width:580px;border-collapse:collapse;font-size:14px}.program-table-scroll caption{text-align:left;padding:0 0 14px;color:#56675f}.program-table-scroll th,.program-table-scroll td{padding:13px 10px;border:1px solid #d3ddd7;text-align:center;white-space:nowrap}.program-table-scroll thead th{background:#214c41;color:white;font-size:12px}.program-table-scroll tbody th{text-align:left;background:#f0f4f1}.program-table-scroll tbody th,.program-table-scroll thead th:first-child{position:sticky;left:0}.program-table-scroll td{color:#214c41}.program-note{font-size:13px!important;line-height:1.8;color:#65736c;margin-top:20px}
 @media(min-width:900px){.program-options{grid-template-columns:repeat(4,minmax(0,1fr))}.program-option{padding:16px 10px;min-height:146px;pointer-events:none}.program-option[aria-pressed="true"]{padding:16px 10px;border:1px solid #ccd8d3;background:#fff}.program-option strong{font-size:14px}.program-mobile{display:none}.program-comparison{border:0}.program-comparison summary{display:none}}
+.dental-results{margin:40px 0;padding:28px 0;border-top:1px solid #d5dfda;border-bottom:1px solid #d5dfda}
+.dental-results h2{font-size:24px;letter-spacing:0;margin:0 0 20px}
+.dental-side-picker{display:flex;gap:4px;width:192px;padding:4px;background:#edf2ef;border-radius:6px;margin-bottom:20px}
+.dental-side-picker[hidden],.dental-result-pair[hidden]{display:none}
+.dental-side-picker button{flex:1;min-height:44px;border:0;border-radius:4px;background:transparent;color:#4d6259;font:inherit;font-weight:700;cursor:pointer}
+.dental-side-picker button[aria-pressed="true"]{background:#214c41;color:#fff}
+.dental-side-picker button:focus-visible,.dental-result-pair a:focus-visible{outline:3px solid #bc8549;outline-offset:3px}
+.dental-result-pair{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;margin-top:20px}
+.dental-result-pair figure{margin:0;min-width:0}.dental-result-pair figcaption{display:flex;align-items:center;gap:10px;margin:0 0 10px;font-size:16px;color:#214c41}.dental-result-pair figcaption span{font-size:13px;color:#69776f}
+.dental-result-pair a{display:block;background:#f0f3f1;border-radius:6px;overflow:hidden}.dental-result-pair img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain}
+@media(min-width:900px){.dental-result-pair{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}}

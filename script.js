@@ -1,4 +1,17 @@
 (() => {
+  const sidePicker = document.querySelector('.dental-side-picker');
+  if (sidePicker) {
+    sidePicker.hidden = false;
+    const selectSide = side => {
+      sidePicker.querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.dentalSide === side)));
+      document.querySelectorAll('[data-dental-panel]').forEach(panel => { panel.hidden = panel.dataset.dentalPanel !== side; });
+    };
+    sidePicker.addEventListener('click', event => {
+      const button = event.target.closest('[data-dental-side]');
+      if (button) selectSide(button.dataset.dentalSide);
+    });
+    selectSide('left');
+  }
   const comparison = document.querySelector('.program-comparison');
   if (comparison) {
     const desktop = matchMedia('(min-width: 900px)');

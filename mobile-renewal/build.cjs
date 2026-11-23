@@ -9,7 +9,7 @@ const assetVersion = file => createHash('sha256').update(fs.readFileSync(path.jo
 const source = path.join(__dirname, 'reference/assets/images');
 const professionalSource = process.env.HOSPITAL_PHOTO_DIR || 'C:/Users/Jiseong/Desktop/공유폴더/동물병원 자료/스물하나동물병원 전문가 사진';
 const base = process.env.SITE_URL ? process.env.SITE_URL.replace(/\/?$/, '/') : null;
-const includeReviews = process.env.INCLUDE_REVIEWS !== 'false';
+const includeReviews = false;
 const esc = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const icon = name => {
   const nodes = lucide[name];

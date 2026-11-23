@@ -21,6 +21,12 @@ function build(env) {
 
 // Publish only generated site files; source photos and local backups stay local.
 try {
+  // Withdraw review captures from both public and preview assets.
+  for (const directory of [path.join(root, "assets"), path.join(preview, "assets")]) {
+    for (const file of ["review-cat.png", "review-checkup.png", "review-dental.png"]) {
+      fs.rmSync(path.join(directory, file), { force: true });
+    }
+  }
   build({
     SITE_URL: siteUrl.href,
     INCLUDE_REVIEWS: String(settings.includeReviews),
@@ -51,5 +57,5 @@ try {
   console.log(`Prepared public website: ${siteUrl.href}`);
 } finally {
   // Keep the separately accessible design preview out of search results.
-  build({ SITE_URL: "", INCLUDE_REVIEWS: "true", GOOGLE_SITE_VERIFICATION: "" });
+  build({ SITE_URL: "", INCLUDE_REVIEWS: "false", GOOGLE_SITE_VERIFICATION: "" });
 }
